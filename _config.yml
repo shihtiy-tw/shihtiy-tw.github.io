@@ -13,14 +13,14 @@ baseurl: ''
 lang: en
 
 # Change to your timezone › http://www.timezoneconverter.com/cgi-bin/findzone/findzone
-timezone: Asia/Shanghai
+timezone: Europe/Dublin
 
 # jekyll-seo-tag settings › https://github.com/jekyll/jekyll-seo-tag/blob/master/docs/usage.md
 # ↓ --------------------------
 
-title: Chirpy                          # the main title
+title: Shih-Ting, Yuan                         # the main title
 
-tagline: A text-focused Jekyll theme   # it will display as the sub-title
+tagline: Things as they really are.   # it will display as the sub-title
 
 description: >-                        # used by seo meta and the atom feed
   A minimal, portfolio, sidebar,
@@ -31,23 +31,26 @@ description: >-                        # used by seo meta and the atom feed
 url: ''
 
 github:
-  username: github_username             # change to your github username
+  username: shihtiy-tw             # change to your github username
 
 twitter:
-  username: twitter_username            # change to your twitter username
+  username: shihtiy            # change to your twitter username
+
+linkedin:
+  username: shih-ting-yuan            # change to your twitter username
 
 social:
   # Change to your full name.
   # It will be displayed as the default author of the posts and the copyright owner in the Footer
-  name: your_full_name
-  email: example@doamin.com             # change to your email address
+  name: Shih-Ting, Yuan
+  email: shihtiy.tw@gmail.com             # change to your email address
   links:
     # The first element serves as the copyright owner's link
-    - https://twitter.com/username      # change to your twitter homepage
-    - https://github.com/username       # change to your github homepage
+    - https://twitter.com/shihtiy      # change to your twitter homepage
+    - https://github.com/shihtiy-tw       # change to your github homepage
     # Uncomment below to add more social links
-    # - https://www.facebook.com/username
-    # - https://www.linkedin.com/in/username
+    - https://www.facebook.com/stanley.yuan.7127
+    - https://www.linkedin.com/in/shiht-ting-yuan
 
 google_site_verification: google_meta_tag_verification # change to your verification string
 
@@ -72,17 +75,17 @@ google_analytics:
 #     light  - Use the light color scheme
 #     dark   - Use the dark color scheme
 #
-theme_mode:   # [light|dark]
+theme_mode: dark  # [light|dark]
 
 # The CDN endpoint for images.
 # Notice that once it is assigned, the CDN url
 # will be added to all image (site avatar & posts' images) paths starting with '/'
 #
 # e.g. 'https://cdn.com'
-img_cdn: 'https://cdn.jsdelivr.net/gh/cotes2020/chirpy-images@0a003683c0c3ca549d12c309f9b3e03ea20981e5'
+img_cdn:
 
 # the avatar on sidebar, support local or CORS resources
-avatar: '/commons/avatar.jpg'
+avatar: ./assets/img/avatar/VKndUsfW_400x400.jpg
 
 # boolean type, the global switch for ToC in posts.
 toc: true

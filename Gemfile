@@ -23,5 +23,8 @@ gem "webrick", "~> 1.7"
 
 # New tab for link
 gem 'jekyll-target-blank', '~> 2.0'
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 624c098 ([plugin]: Add jekyll-target-blank for the external links)

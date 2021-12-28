@@ -100,7 +100,7 @@ ControlMaster auto
 ControlPath ~/.ssh/master-%C
 ```
 
-We can see the length of the socket path is much less then the length limit and we can avoid the socket length issue with `ControlPath`
+We can see the length of the socket path is much less then the length limit and we can avoid the socket length issue with `ControlPath`:
 
 ```bash
 $ ls ~/.ssh | grep master

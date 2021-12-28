@@ -5,13 +5,6 @@ date: 2021-12-28 22:00:00 +0000
 tags: [linux, ssh, git, socket]
 crosspost_to_medium: true
 
-=======
-title: [Linux] Why do I run into "... too long for Unix domain socket" when git clone with SSH?
-date: YYYY-MM-DD HH:MM:SS +0000
-categories: [CSIE, Linux]
-date: 2021-12-28 22:00:00 +0000
-tags: [linux, ssh, git, socket]
->>>>>>> fda2fb9 ([draft]: _posts/2021-12-28-too-long-for-Unix-domain-socket)
 ---
 
 ## Summary
@@ -31,7 +24,6 @@ Specify the path to the control socket used for connection sharing as described 
 ```
 {: .nolineno }
 
-=======
 When using SSH, people may want to speed up the SSH connection establishment with configuration of ControlMaster and ControlPath. According to [the ssh_config man page](https://linux.die.net/man/5/ssh_config):
 
 ```
@@ -41,7 +33,6 @@ ControlPath
 Specify the path to the control socket used for connection sharing as described in the ControlMaster section above or the string ''none'' to disable connection sharing...
 ```
 
->>>>>>> fda2fb9 ([draft]: _posts/2021-12-28-too-long-for-Unix-domain-socket)
 This means that with multiple SSH session with the control socket to speed up the SSH connection establishment.
 
 ## Issue

@@ -61,9 +61,12 @@ GEM
       jekyll (>= 3.8, < 5.0)
     jekyll-sitemap (1.4.0)
       jekyll (>= 3.7, < 5.0)
+<<<<<<< HEAD
     jekyll-target-blank (2.0.0)
       jekyll (>= 3.0, < 5.0)
       nokogiri (~> 1.10)
+=======
+>>>>>>> 2db227c (Add Gemfile.lock)
     jekyll-watch (2.2.1)
       listen (~> 3.0)
     kramdown (2.3.1)
@@ -112,7 +115,10 @@ PLATFORMS
 
 DEPENDENCIES
   html-proofer (~> 3.18)
+<<<<<<< HEAD
   jekyll-target-blank (~> 2.0)
+=======
+>>>>>>> 2db227c (Add Gemfile.lock)
   jekyll-theme-chirpy!
   tzinfo (~> 1.2)
   tzinfo-data

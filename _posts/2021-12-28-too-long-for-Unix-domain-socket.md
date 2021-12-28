@@ -113,4 +113,4 @@ $ echo "/home/shihtiy/.ssh/master-e7f58eb55da9db1a90b39dba271ef9c92838e09a" | wc
 ## References
 
 [^2]: [Setup steps for SSH connections to AWS CodeCommit repositories on Linux, macOS, or Unix ](https://docs.aws.amazon.com/codecommit/latest/userguide/setting-up-ssh-unixes.html)
-[^1]: https://man.openbsd.org/ssh_config.5
+[^1]: [ssh_config(5) - OpenBSD manual pages](https://man.openbsd.org/ssh_config.5)

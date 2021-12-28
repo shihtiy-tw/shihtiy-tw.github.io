@@ -9,6 +9,7 @@ crosspost_to_medium: true
 title: [Linux] Why do I run into "... too long for Unix domain socket" when git clone with SSH?
 date: YYYY-MM-DD HH:MM:SS +0000
 categories: [CSIE, Linux]
+date: 2021-12-28 22:00:00 +0000
 tags: [linux, ssh, git, socket]
 >>>>>>> fda2fb9 ([draft]: _posts/2021-12-28-too-long-for-Unix-domain-socket)
 ---

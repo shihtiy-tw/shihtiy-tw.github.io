@@ -36,7 +36,7 @@ $ ulimit -Sn
 
 However, under the configuration mentioned above (both the soft and hard limit to `65534`), with AWS System Manager(SSM) Run Command function[^1] to execute command, we will find that the following situations for the process on a CentOS7 instance:
 
-- When the command is without `sudo`: 
+- When the command is without `sudo`:
     - The soft limit will be `1024`.
     - The hard limit will be `4096`.
 - When the command is with `sudo`:
@@ -89,11 +89,8 @@ session     required      pam_limits.so  <======================= Use /etc/secur
 
 In `/etc/pam.d/system-auth`, it will use a module called `pam_limits.so`. According to the [pam_limits man page](https://www.man7.org/linux/man-pages/man8/pam_limits.8.html), this module will refer to `/etc/security/limits.conf` to set the resource limit during the user login/execute command (the period is called session):
 
-```bash
-The pam_limits PAM module sets limits on the system resources that can be obtained in a user-session. Users of uid=0 are affected by this limits, too.
-
-By default limits are taken from the /etc/security/limits.conf config file...
-```
+> The pam_limits PAM module sets limits on the system resources that can be obtained in a user-session. Users of uid=0 are affected by this limits, too.
+> By default limits are taken from the /etc/security/limits.conf config file...
 
 ### Command with sudo and without sudo
 
@@ -136,9 +133,7 @@ In a systemd.unit, we can configure the resource limit for certain systemd servi
 
 When systemd pursers the service unit file for systemd service, systemd will also purser the configuration files in `drop-in` directory. In this way, we needn't change any configuration in the service unit file, as mentioned in the [systemd.unit man page](https://man7.org/linux/man-pages/man5/systemd.unit.5.html):
 
-```
-Along with a unit file foo.service, a "drop-in" directory foo.service.d/ may exist. All files with the suffix ".conf" from this directory will be parsed after the unit file itself is parsed. This is useful to alter or add configuration settings for a unit, without having to modify unit files. Drop-in files must contain appropriate section headers.
-```
+> Along with a unit file foo.service, a "drop-in" directory foo.service.d/ may exist. All files with the suffix ".conf" from this directory will be parsed after the unit file itself is parsed. This is useful to alter or add configuration settings for a unit, without having to modify unit files. Drop-in files must contain appropriate section headers.
 
 #### Example
 
@@ -194,11 +189,9 @@ In `systemd-system.conf`, we can configure the limit for all the systemd service
 
 With the step, we needn't to change the configuration under `/etc/systemd/system.conf`, as mentioned in the [systemd-system.conf man page](https://man7.org/linux/man-pages/man5/systemd-system.conf.5.html):
 
-```txt
-When run as a system instance, systemd interprets the configuration file system.conf and the files in system.conf.d directories;
-...
-By default, the configuration file in /etc/systemd/ contains commented out entries showing the defaults as a guide to the administrator. This file can be edited to create local overrides.
-```
+> When run as a system instance, systemd interprets the configuration file system.conf and the files in system.conf.d directories;
+> ...
+> By default, the configuration file in /etc/systemd/ contains commented out entries showing the defaults as a guide to the administrator. This file can be edited to create local overrides.
 
 #### Example
 

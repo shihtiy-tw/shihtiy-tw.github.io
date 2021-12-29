@@ -1,6 +1,7 @@
 ---
 title: '[Linux] Why do I run into "... too long for Unix domain socket" when git clone with SSH?'
 categories: [CSIE, Linux]
+date: 2021-12-28 22:00:00 +0000
 tags: [linux, ssh, git, socket]
 ---
 
@@ -100,7 +101,7 @@ ControlMaster auto
 ControlPath ~/.ssh/master-%C
 ```
 
-We can see the length of the socket path is much less then the length limit and we can avoid the socket length issue with `ControlPath`
+We can see the length of the socket path is much less then the length limit and we can avoid the socket length issue with `ControlPath`:
 
 ```bash
 $ ls ~/.ssh | grep master
@@ -112,4 +113,4 @@ $ echo "/home/shihtiy/.ssh/master-e7f58eb55da9db1a90b39dba271ef9c92838e09a" | wc
 ## References
 
 [^2]: [Setup steps for SSH connections to AWS CodeCommit repositories on Linux, macOS, or Unix ](https://docs.aws.amazon.com/codecommit/latest/userguide/setting-up-ssh-unixes.html)
-[^1]: https://man.openbsd.org/ssh_config.5
+[^1]: [ssh_config(5) - OpenBSD manual pages](https://man.openbsd.org/ssh_config.5)

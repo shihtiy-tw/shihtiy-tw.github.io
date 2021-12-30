@@ -1,6 +1,6 @@
 ---
 
-title: [Linux] NFS client port
+title: '[Linux] NFS client port range'
 date: 2021-12-30 16:17:17 +0000
 categories: [CSIE, Linux]
 tags: [linux, nfs, tcp, ip, firewall]
@@ -20,7 +20,7 @@ On AWS, VPC provides several firewall configurations, the basic firewall configu
 - security group:[^2]
     - a stateful firewall at the network interface(ENI) level
 - network access control list (ACL):[^3]
-    - a stateless firewall at the subnet level. 
+    - a stateless firewall at the subnet level.
 
 ## Issue Description
 

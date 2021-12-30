@@ -62,12 +62,29 @@ From [NFS man page](https://linux.die.net/man/5/nfs), it explains that NFS clien
 > The NFS client can choose any source port value for its sockets, but usually chooses a _privileged_ port...
 > As described above, the traditional default NFS authentication scheme, known as AUTH_SYS, relies on sending local UID and GID numbers to identify users making NFS requests. An NFS server assumes that if a connection comes from a privileged port, the UID and GID numbers in the NFS requests on this connection have been verified by the client's kernel or some other local authority.
 
-The privileged port range is defined by kernel parameter: max_resvport and min_resvport[^5]
+The privileged port range is defined by these two kernel parameters: max_resvport and min_resvport[^5]
 
 ```bash
 $ sysctl -a | grep resvport
 sunrpc.max_resvport = 1023
 sunrpc.min_resvport = 665
+```
+
+We can see the NFS client port change if we update these two kernel parameters:
+
+```bash
+$ sudo sysctl -w sunrpc.max_resvport=2048
+sunrpc.max_resvport = 2048
+$ sudo sysctl -w sunrpc.min_resvport=1024
+sunrpc.min_resvport = 1024
+
+$ sysctl -a | grep resvport
+sunrpc.max_resvport = 2048
+sunrpc.min_resvport = 1024
+
+$ sudo mount -t nfs4 -o nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2,resvport fs-0705b30dbe1741990.efs.us-east-1.amazonaws.com:/ /mnt
+$ sudo netstat -anotp | grep 2049
+tcp        0      0 172.31.33.197:1306      172.31.35.153:2049      ESTABLISHED -                    keepalive (23.93/0/0)
 ```
 
 If we allow the outbound traffic on the NACL of the EFS's subnets to the privileged port range of the client, the client will mount the EFS successfully.

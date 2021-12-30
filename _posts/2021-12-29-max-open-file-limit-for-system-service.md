@@ -139,45 +139,45 @@ When systemd pursers the service unit file for systemd service, systemd will als
 
 Take `amazon-ssm-agent` daemon service for example:
 
-1. check the amazon-ssm-agent original max open files limit ：
+1.  check the amazon-ssm-agent original max open files limit ：
 
-```bash
-$ cat /proc/$(pidof amazon-ssm-agent)/limits | grep files
-Max open files            1024                 4096                 files
-```
+    ```bash
+    $ cat /proc/$(pidof amazon-ssm-agent)/limits | grep files
+    Max open files            1024                 4096                 files
+    ```
 
-2. Create a `drop-in` directory：
+2.  Create a `drop-in` directory：
 
-```bash
-$ sudo mkdir -p /etc/systemd/system/amazon-ssm-agent.service.d/
-```
+    ```bash
+    $ sudo mkdir -p /etc/systemd/system/amazon-ssm-agent.service.d/
+    ```
 
-3. Add a configuration file with extension `.conf`：
+3.  Add a configuration file with extension `.conf`：
 
-```bash
-$ sudo vi /etc/systemd/system/amazon-ssm-agent.service.d/filelimit.conf
-```
+    ```bash
+    $ sudo vi /etc/systemd/system/amazon-ssm-agent.service.d/filelimit.conf
+    ```
 
-4. Add these two lines (according to the man page of systemd.service：The service specific configuration options are configured in the [Service] section)：
+4.  Add these two lines (according to the man page of systemd.service：The service specific configuration options are configured in the [Service] section)：
 
-```config
-[Service]
-LimitNOFILE=2048:8192
-```
+    ```config
+    [Service]
+    LimitNOFILE=2048:8192
+    ```
 
-5. Reload systemd configuration and restart the `amazon-ssm-agnet` daemon service：
+5.  Reload systemd configuration and restart the `amazon-ssm-agnet` daemon service：
 
-```bash
-$ sudo systemctl daemon-reload
-$ sudo systemctl restart amazon-ssm-agent
-```
+    ```bash
+    $ sudo systemctl daemon-reload
+    $ sudo systemctl restart amazon-ssm-agent
+    ```
 
-6. Confirm the `amazon-ssm-agent` process use the max open file limit:
+6.  Confirm the `amazon-ssm-agent` process use the max open file limit:
 
-```bash
-$ cat /proc/$(pidof amazon-ssm-agent)/limits | grep files
-Max open files            2048                 8192                 files
-```
+    ```bash
+    $ cat /proc/$(pidof amazon-ssm-agent)/limits | grep files
+    Max open files            2048                 8192                 files
+    ```
 
 ### systemd-system.conf
 
@@ -197,57 +197,57 @@ With the step, we needn't to change the configuration under `/etc/systemd/system
 
 Take `sshd` daemon service for example:
 
-1. Check `sshd` max open files limit：
+1.  Check `sshd` max open files limit：
 
-```bash
-$ systemctl status sshd | grep -i pid
- Main PID: 1596 (sshd)
+    ```bash
+    $ systemctl status sshd | grep -i pid
+     Main PID: 1596 (sshd)
 
-$ cat /proc/1596/limits | grep files
-Max open files            1024                 4096                 files
-```
+    $ cat /proc/1596/limits | grep files
+    Max open files            1024                 4096                 files
+    ```
 
-2. Create `/etc/systemd/system.conf.d` directory：
+2.  Create `/etc/systemd/system.conf.d` directory：
 
-```bash
-$ sudo mkdir /etc/systemd/system.conf.d
-```
+    ```bash
+    $ sudo mkdir /etc/systemd/system.conf.d
+    ```
 
-3. Create an configuration file with extension `.conf`：
+3.  Create an configuration file with extension `.conf`：
 
-```bash
-$ sudo vi /etc/systemd/system.conf.d/filelimit.conf
-```
+    ```bash
+    $ sudo vi /etc/systemd/system.conf.d/filelimit.conf
+    ```
 
-Add the following two lines (according to `systemd-system.conf` man page ：All options are configured in the [Manager] section)：
+    Add the following two lines (according to `systemd-system.conf` man page ：All options are configured in the [Manager] section)：
 
-```config
-[Manager]
-DefaultLimitNOFILE=3072:12288
-```
+    ```config
+    [Manager]
+    DefaultLimitNOFILE=3072:12288
+    ```
 
-4. Reboot the system：
+4.  Reboot the system：
 
-```bash
-$ sudo reboot
-```
+    ```bash
+    $ sudo reboot
+    ```
 
-5. Confirm `sshd` process use new max open file limit:
+5.  Confirm `sshd` process use new max open file limit:
 
-```bash
-$ systemctl status sshd | grep -i pid
- Main PID: 1105 (sshd)
+    ```bash
+    $ systemctl status sshd | grep -i pid
+     Main PID: 1105 (sshd)
 
-$ cat /proc/1105/limits | grep files
-Max open files            3072                 12288                files
-```
+    $ cat /proc/1105/limits | grep files
+    Max open files            3072                 12288                files
+    ```
 
-6. We can see the `amazon-ssm-agent` process still use its own configuration. `amazon-ssm-agent` will not use the systemd-wide configuration:
+6.  We can see the `amazon-ssm-agent` process still use its own configuration. `amazon-ssm-agent` will not use the systemd-wide configuration:
 
-```bash
-$ cat /proc/$(pidof amazon-ssm-agent)/limits | grep files
-Max open files            2048                 8192                 files
-```
+    ```bash
+    $ cat /proc/$(pidof amazon-ssm-agent)/limits | grep files
+    Max open files            2048                 8192                 files
+    ```
 
 ## References
 

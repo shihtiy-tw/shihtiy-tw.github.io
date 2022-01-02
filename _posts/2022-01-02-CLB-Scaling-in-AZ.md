@@ -120,7 +120,7 @@ I will do use ab[^2] to increase the load on CLB to let CLB scale and check whic
     }
     ```
 
-### Scenario #2: test if CLB scales in all AZ
+### Scenario #2: test if CLB scales in all enabled AZ
 
 | AZ enabled | if backend instance exist | backend health |
 |:----------:|:-------------------------:|:--------------:|

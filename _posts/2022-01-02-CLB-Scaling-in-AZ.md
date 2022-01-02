@@ -1,18 +1,11 @@
 ---
 
-<<<<<<< HEAD
 title: '[AWS][CLB] Which AZ will CLB scale?'
 date: 2022-01-02 17:20:24 +0000
 categories: [CSIE, Cloud, AWS]
 tags: [elb, clb, aws, scaling, networking]
 crosspost_to_medium: true
 
-=======
-title: What AZ will CLB scales?
-date: 2022-01-02 17:20:24 +0000
-categories: [AWS, Networking]
-tags: [elb, aws, scaling]
->>>>>>> d1601ba ([post]: 2022-01-02-CLB-Scaling-in-AZ)
 ---
 
 
@@ -24,46 +17,26 @@ When under the following conditions:
 - Cross-zone load balancing is disabled.
 - Healthy backend instances only locate in one of the AZs.
 
-<<<<<<< HEAD
 CLB DNS only register the IPs of the AZ where the healthy backend instance locate.[^1] Therefore, some people may wonder CLB will scale:
 
 - All enabled AZ?
 - AZ with backends?
 - Or AZ with healthy backends?
 
-This article records a simple lab for CLB scaling under the conditions mentioned above and demonstrate that the CLB scales in **the enabled AZ with any backend instance no matter the backend instance is healthy or not**.
-
-## Scenarios
-=======
-the CLB DNS only register the IPs of the AZ where the healthy backend instance locate.[^1] Therefore, some people may wonder in which AZ CLB will scale:
-
-- All enabled AZ
-- AZ with backends
-- Or AZ with healthy backends
-
 This article records a simple lab for CLB scaling under the conditions mentioned above.
 
-## Scenario
->>>>>>> d1601ba ([post]: 2022-01-02-CLB-Scaling-in-AZ)
+## Scenarios
 
 In these three different scenarios below:
 
 1.  Scenario #1: test if CLB only scales in AZ with healthy backends
 
-<<<<<<< HEAD
     | AZ enabled | if backend instance exist | backend health |
-=======
-    | AZ enabled | if backend instance exist | backend health | 
->>>>>>> d1601ba ([post]: 2022-01-02-CLB-Scaling-in-AZ)
     |:----------:|:-------------------------:|:--------------:|
     | us-east-1a |            Yes            |     health     |
     | us-east-1b |            Yes            |   unhealthy    |
 
-<<<<<<< HEAD
 2.  Scenario #2: test if CLB scales in all enabled AZ
-=======
-2.  Scenario #2: test if CLB only scales in all enabled AZ
->>>>>>> d1601ba ([post]: 2022-01-02-CLB-Scaling-in-AZ)
 
     | AZ enabled | if backend instance exist | backend health |
     |:----------:|:-------------------------:|:--------------:|
@@ -71,28 +44,15 @@ In these three different scenarios below:
     | us-east-1b |            Yes            |   unhealthy    |
     | us-east-1c |            Yes            |     health     |
 
-<<<<<<< HEAD
 3.  Scenario #3: test if CLB scales in AZ with backends
-=======
-3.  Scenario #3: test if CLB only scales in AZ with backends
->>>>>>> d1601ba ([post]: 2022-01-02-CLB-Scaling-in-AZ)
 
     | AZ enabled | if backend instance exist | backend health |
     |:----------:|:-------------------------:|:--------------:|
     | us-east-1a |            Yes            |     health     |
     | us-east-1b |            Yes            |   unhealthy    |
-<<<<<<< HEAD
     | us-east-1c |            Yes            |     health     |
 
 I will do use ab[^2] to increase the load on CLB to let CLB scale and check which AZ will the CLB scales.
-=======
-    | us-east-1c |            Yes            |     health     | 
-
-I will do the following steps:
-
-1. use ab[^2] to increase the load on CLB to let CLB scale
-2. check which AZ will the CLB scales
->>>>>>> d1601ba ([post]: 2022-01-02-CLB-Scaling-in-AZ)
 
 ### Scenario #1: test if CLB only scales in AZ with healthy backends
 
@@ -114,13 +74,8 @@ I will do the following steps:
     |  ip-172-31-12-183.ec2.internal |  us-east-1b  |
     +--------------------------------+--------------+
     ```
-<<<<<<< HEAD
 
 2.  Check the ENIs for CLB:
-=======
-    
-2.  Check the ENIs for CLB:   
->>>>>>> d1601ba ([post]: 2022-01-02-CLB-Scaling-in-AZ)
     ```bash
     $ aws ec2 describe-network-interfaces | jq  -r '.NetworkInterfaces[] | select(.Description | contains("CLB-Test")) | {IP:.Association.PublicIp, AZ:.AvailabilityZone}'
 
@@ -133,28 +88,17 @@ I will do the following steps:
       "AZ": "us-east-1a"
     }
     ```
-<<<<<<< HEAD
 
-=======
-    
->>>>>>> d1601ba ([post]: 2022-01-02-CLB-Scaling-in-AZ)
 3.  Confirm only the IP of the AZ with healthy backend in CLB DNS record:
 
     ```bash
     $ dig +short CLB-Test-1513212108.us-east-1.elb.amazonaws.com
     52.54.181.219
     ```
-<<<<<<< HEAD
 
 4.  Use ab command to test CLB.
 
 5.  See the CLB scaled in both AZs no matter the backend is healthy or not:
-=======
-    
-4.  Use ab command to test CLB
-
-4.  See the CLB scaled in both AZs:
->>>>>>> d1601ba ([post]: 2022-01-02-CLB-Scaling-in-AZ)
 
     ```bash
     $ aws ec2 describe-network-interfaces | jq  -r '.NetworkInterfaces[] | select(.Description | contains("CLB-Test")) | {IP:.Association.PublicIp, AZ:.AvailabilityZone}'
@@ -176,11 +120,7 @@ I will do the following steps:
     }
     ```
 
-<<<<<<< HEAD
-### Scenario #2: test if CLB scales in all enabled AZ
-=======
-### Scenario #2: test if CLB only scales in all AZ
->>>>>>> d1601ba ([post]: 2022-01-02-CLB-Scaling-in-AZ)
+### Scenario #2: test if CLB scales in all AZ
 
 | AZ enabled | if backend instance exist | backend health |
 |:----------:|:-------------------------:|:--------------:|
@@ -202,13 +142,8 @@ I will do the following steps:
     |  ip-172-31-2-69.ec2.internal   |  us-east-1b  |
     +--------------------------------+--------------+
     ```
-<<<<<<< HEAD
 
 2.  Check the ENIs for CLB:
-=======
-    
-2.  Check the ENIs for CLB:   
->>>>>>> d1601ba ([post]: 2022-01-02-CLB-Scaling-in-AZ)
     ```bash
     $ aws ec2 describe-network-interfaces | jq  -r '.NetworkInterfaces[] | select(.Description | contains("CLB-Test")) | {IP:.Association.PublicIp, AZ:.AvailabilityZone}'
 
@@ -225,11 +160,7 @@ I will do the following steps:
       "AZ": "us-east-1a"
     }
     ```
-<<<<<<< HEAD
 
-=======
-    
->>>>>>> d1601ba ([post]: 2022-01-02-CLB-Scaling-in-AZ)
 3.  Confirm only the IP of the AZ with healthy backend in CLB DNS record:
 
     ```bash
@@ -237,15 +168,9 @@ I will do the following steps:
     3.230.196.107
     ```
 
-<<<<<<< HEAD
 4.  Use ab command to test CLB.
 
 5.  See the CLB did not scale the enabled AZ without any backend which is us-east-1c in this lab:
-=======
-4.  Use ab command to test CLB
-
-5.  See the CLB did not scale the enabled AZ without any backend.
->>>>>>> d1601ba ([post]: 2022-01-02-CLB-Scaling-in-AZ)
 
     ```bash
     $ aws ec2 describe-network-interfaces | jq  -r '.NetworkInterfaces[] | select(.Description | contains("CLB-Test")) | {IP:.Association.PublicIp, AZ:.AvailabilityZone}'
@@ -271,21 +196,13 @@ I will do the following steps:
     }
     ```
 
-<<<<<<< HEAD
 ### Scenario #3: test if CLB scales in AZ with backends
-=======
-### Scenario #3: test if CLB only scales in AZ with backends
->>>>>>> d1601ba ([post]: 2022-01-02-CLB-Scaling-in-AZ)
 
 | AZ enabled | if backend instance exist | backend health |
 |:----------:|:-------------------------:|:--------------:|
 | us-east-1a |            Yes            |     health     |
 | us-east-1b |            Yes            |   unhealthy    |
-<<<<<<< HEAD
 | us-east-1c |            Yes            |     health     |
-=======
-| us-east-1c |            Yes            |     health     | 
->>>>>>> d1601ba ([post]: 2022-01-02-CLB-Scaling-in-AZ)
 
 1.  Follow the scenario #2, I add another backend instance to us-east-1a:
 
@@ -335,37 +252,7 @@ I will do the following steps:
 
 ## Summary
 
-<<<<<<< HEAD
-Take a look of the labs above:
-
-1.  Scenario #1: test if CLB only scales in AZ with healthy backends
-
-    | AZ enabled   | if backend instance exist   | backend health   | if CLB scale     |
-    | :----------: | :-------------------------: | :--------------: | :--------------: |
-    | us-east-1a   | Yes                         | health           | Yes              |
-    | us-east-1b   | Yes                         | unhealthy        | Yes              |
-
-2.  Scenario #2: test if CLB scales in all enabled AZ
-
-    | AZ enabled   | if backend instance exist   | backend health   | if CLB scale     |
-    | :----------: | :-------------------------: | :--------------: | :--------------: |
-    | us-east-1a   | No                          | none             | No               |
-    | us-east-1b   | Yes                         | unhealthy        | Yes              |
-    | us-east-1c   | Yes                         | health           | Yes              |
-
-3.  Scenario #3: test if CLB scales in AZ with backends
-
-    | AZ enabled | if backend instance exist | backend health |  if CLB scale     |
-    |:----------:|:-------------------------:|:--------------:|  :--------------: |
-    | us-east-1a |            Yes            |     health     |  Yes              |
-    | us-east-1b |            Yes            |   unhealthy    |  Yes              |
-    | us-east-1c |            Yes            |     health     |  Yes              |
-
-
-From the labs above, we can see that the CLB scales in **the enabled AZ with any backend instance no matter the backend instance is healthy or not**.
-=======
-From the labs above, we can see that the CLB scales in ==the enabled AZ with any backend instance==, no matter the backend instance is healthy or not.
->>>>>>> d1601ba ([post]: 2022-01-02-CLB-Scaling-in-AZ)
+From the labs above, we can see that the CLB scales in **the enabled AZ with any backend instance** no matter the backend instance is healthy or not.
 
 For CLB with cross-zone disabled, balancing the backends capacity in all the enable AZs is a better way as typically the requests on each IP of CLB may be roughly balancing (but it still depends on the behaviour of clients, name server, resolver).
 
@@ -375,8 +262,4 @@ For CLB with cross-zone enabled, it may not be needed to balance the backend cap
 
 [^1]: [How Elastic Load Balancing works - Request routing](https://docs.aws.amazon.com/elasticloadbalancing/latest/userguide/how-elastic-load-balancing-works.html#request-routing)
 [^2]: [ab - Apache HTTP server benchmarking tool - Apache HTTP Server Version 2.4](https://httpd.apache.org/docs/2.4/programs/ab.html)
-<<<<<<< HEAD
 [^3]: [Improving Performance and Reducing Cost Using Availability Zone Affinity - AWS Architecture Blog](https://aws.amazon.com/blogs/architecture/improving-performance-and-reducing-cost-using-availability-zone-affinity/)
-=======
-[^3]: [Improving Performance and Reducing Cost Using Availability Zone Affinity | AWS Architecture Blog](https://aws.amazon.com/blogs/architecture/improving-performance-and-reducing-cost-using-availability-zone-affinity/)
->>>>>>> d1601ba ([post]: 2022-01-02-CLB-Scaling-in-AZ)

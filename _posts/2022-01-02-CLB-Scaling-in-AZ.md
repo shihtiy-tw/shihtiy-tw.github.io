@@ -3,7 +3,7 @@
 title: '[AWS] Which AZ will CLB scale?'
 date: 2022-01-02 17:20:24 +0000
 categories: [AWS, Networking]
-tags: [elb, aws, scaling]
+tags: [elb, clb, aws, scaling, networking]
 ---
 
 
@@ -249,6 +249,32 @@ I will do use ab[^2] to increase the load on CLB to let CLB scale and check whic
     ```
 
 ## Summary
+
+Take a look of the labs above:
+
+1.  Scenario #1: test if CLB only scales in AZ with healthy backends
+
+    | AZ enabled   | if backend instance exist   | backend health   | if CLB scale     |
+    | :----------: | :-------------------------: | :--------------: | :--------------: |
+    | us-east-1a   | Yes                         | health           | Yes              |
+    | us-east-1b   | Yes                         | unhealthy        | Yes              |
+
+2.  Scenario #2: test if CLB scales in all enabled AZ
+
+    | AZ enabled   | if backend instance exist   | backend health   | if CLB scale     |
+    | :----------: | :-------------------------: | :--------------: | :--------------: |
+    | us-east-1a   | No                          | none             | No               |
+    | us-east-1b   | Yes                         | unhealthy        | Yes              |
+    | us-east-1c   | Yes                         | health           | Yes              |
+
+3.  Scenario #3: test if CLB scales in AZ with backends
+
+    | AZ enabled | if backend instance exist | backend health |  if CLB scale     |
+    |:----------:|:-------------------------:|:--------------:|  :--------------: |
+    | us-east-1a |            Yes            |     health     |  Yes              |
+    | us-east-1b |            Yes            |   unhealthy    |  Yes              |
+    | us-east-1c |            Yes            |     health     |  Yes              |
+
 
 From the labs above, we can see that the CLB scales in **the enabled AZ with any backend instance** no matter the backend instance is healthy or not.
 

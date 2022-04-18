@@ -1,6 +1,6 @@
 ---
 
-title: [ECS] How to calculate CPU utilization from ECS endpoint?
+title: '[AWS][ECS] How to calculate CPU utilization from ECS endpoint?'
 date: 2022-04-16 23:01:11 +0000
 categories: [CSIE, AWS]
 tags: [ecs, cpu]

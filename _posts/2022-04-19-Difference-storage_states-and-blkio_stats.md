@@ -1,6 +1,6 @@
 ---
 
-title: '[AWS][ECS] Difference between `storage_stats` and `blkio_stats` from ECS metadata endpoint'
+title: '[AWS][ECS] Difference between storage_stats and blkio_stats from ECS metadata endpoint'
 date: 2022-04-19 00:19:33 +0000
 categories: [CSIE, Cloud, AWS]
 tags: [ECS, Windows]

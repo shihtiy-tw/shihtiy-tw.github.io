@@ -1,6 +1,4 @@
 ---
-
-<<<<<<< HEAD
 title: '[AWS] Which AZ will CLB scale?'
 date: 2022-01-02 17:20:24 +0000
 categories: [CSIE, Cloud, AWS]
@@ -16,7 +14,6 @@ When under the following conditions:
 - Cross-zone load balancing is disabled.
 - Healthy backend instances only locate in one of the AZs.
 
-<<<<<<< HEAD
 CLB DNS only register the IPs of the AZ where the healthy backend instance locate.[^1] Therefore, some people may wonder CLB will scale:
 
 - All enabled AZ?
@@ -50,7 +47,6 @@ In these three different scenarios below:
     |:----------:|:-------------------------:|:--------------:|
     | us-east-1a |            Yes            |     health     |
     | us-east-1b |            Yes            |   unhealthy    |
-<<<<<<< HEAD
     | us-east-1c |            Yes            |     health     |
 
 I will do use ab[^2] to increase the load on CLB to let CLB scale and check which AZ will the CLB scales.
@@ -96,7 +92,6 @@ I will do use ab[^2] to increase the load on CLB to let CLB scale and check whic
     $ dig +short CLB-Test-1513212108.us-east-1.elb.amazonaws.com
     52.54.181.219
     ```
-<<<<<<< HEAD
 
 4.  Use ab command to test CLB.
 
@@ -122,7 +117,6 @@ I will do use ab[^2] to increase the load on CLB to let CLB scale and check whic
     }
     ```
 
-<<<<<<< HEAD
 ### Scenario #2: test if CLB scales in all enabled AZ
 =======
 ### Scenario #2: test if CLB only scales in all AZ
@@ -174,7 +168,6 @@ I will do use ab[^2] to increase the load on CLB to let CLB scale and check whic
     3.230.196.107
     ```
 
-<<<<<<< HEAD
 4.  Use ab command to test CLB.
 
 5.  See the CLB did not scale the enabled AZ without any backend which is us-east-1c in this lab:

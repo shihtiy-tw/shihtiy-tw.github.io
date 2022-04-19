@@ -20,7 +20,7 @@ CLB DNS only register the IPs of the AZ where the healthy backend instance locat
 - AZ with backends?
 - Or AZ with healthy backends?
 
-This article records a simple lab for CLB scaling under the conditions mentioned above.
+This article records a simple lab for CLB scaling under the conditions mentioned above and demonstrate that the CLB scales in **the enabled AZ with any backend instance no matter the backend instance is healthy or not**.
 
 ## Scenarios
 
@@ -118,9 +118,6 @@ I will do use ab[^2] to increase the load on CLB to let CLB scale and check whic
     ```
 
 ### Scenario #2: test if CLB scales in all enabled AZ
-=======
-### Scenario #2: test if CLB only scales in all AZ
->>>>>>> b3bef19 ([post]: 2022-01-02-CLB-Scaling-in-AZ)
 
 | AZ enabled | if backend instance exist | backend health |
 |:----------:|:-------------------------:|:--------------:|
@@ -278,7 +275,7 @@ Take a look of the labs above:
     | us-east-1c |            Yes            |     health     |  Yes              |
 
 
-From the labs above, we can see that the CLB scales in **the enabled AZ with any backend instance** no matter the backend instance is healthy or not.
+From the labs above, we can see that the CLB scales in **the enabled AZ with any backend instance no matter the backend instance is healthy or not**.
 
 For CLB with cross-zone disabled, balancing the backends capacity in all the enable AZs is a better way as typically the requests on each IP of CLB may be roughly balancing (but it still depends on the behaviour of clients, name server, resolver).
 

@@ -1,41 +1,69 @@
 ---
 
+<<<<<<< HEAD
 title: '[AWS][ECS] What I learned about CPU and memory management of Amazon ECS'
 date: 2022-05-08 00:06:00 +0000
 categories: [CSIE, Cloud, AWS]
 tags: [aws, ecs, memory, cpu]
 crosspost_to_medium: true
 
+=======
+title: [AWS][ECS] What I learned about CPU and memory management of Amazon ECS
+date: 2022-05-08 00:06:00 +0000
+categories: [CSIE, Cloud, AWS]
+tags: [aws, ecs, memory, cpu]
+>>>>>>> 3315049 ([post]: add ECS cpu memory article)
 ---
 
 ## Introduction
 
+<<<<<<< HEAD
 This article will go through what I learned from [How Amazon ECS manages CPU and memory resources](https://aws.amazon.com/blogs/containers/how-amazon-ecs-manages-cpu-and-memory-resources/) and few things I add about the CPU and memory management of Amazon ECS.
+=======
+This article will go through what I learned from [How Amazon ECS manages CPU and memory resources | Containers](https://aws.amazon.com/blogs/containers/how-amazon-ecs-manages-cpu-and-memory-resources/) and few things I add about the CPU and memory management of Amazon ECS.
+>>>>>>> 3315049 ([post]: add ECS cpu memory article)
 
 ## Two General Rules
 
 The blog[^1] mentioned that there are two general rules of thumb with containers:
 
+<<<<<<< HEAD
 - unless otherwise restricted and capped, a container gets access to all the CPU and memory capacity available on a given host (operating system).
 - unless otherwise protected and guaranteed, all containers share CPU, memory, and other resources on a given host (operating system) in the same way that other processes running on that host share those resources.
+=======
+- unless otherwise restricted and capped, ==a container gets access to all the CPU and memory capacity available on a given host (operating system).==
+- unless otherwise protected and guaranteed, ==all containers share CPU, memory, and other resources on a given host (operating system)== in the same way that other processes running on that host share those resources.
+>>>>>>> 3315049 ([post]: add ECS cpu memory article)
 
 And we are going to talk about how the task and container access and share the CPU and memory resources with the related configuration defined in a task definition.
 
 ## Memory
 
 For memory management, ECS provides the configuration of two levels:
+<<<<<<< HEAD
 - container-level: `memoryReservation` (soft limit) and `memory` (hard limit)
+=======
+- container-level: `memoryReservation` (soft limit) and `memory` (hard limit) 
+>>>>>>> 3315049 ([post]: add ECS cpu memory article)
 - task-level: `memory` (hard limit)
 
 Let's discuss what the differences, how these settings affect task scheduling and some scenarios of these different memory setting.
 
+<<<<<<< HEAD
 ### Container-level: memoryReservation(soft limit) and memory(hard limit)
+=======
+### Container-level: memoryReservation(soft limit) and memory(hard limit) 
+>>>>>>> 3315049 ([post]: add ECS cpu memory article)
 
 #### memoryReservation(soft limit)
 
 [The task definition document about memory setting](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html#container_definition_memory) mentioned that `memoryReservation` is a soft limit (in MiB):
 
+<<<<<<< HEAD
 - This option indicates the memory size that a task needs on a container instance when being placed.
+=======
+- This option indicates the memory size that a task needs on a container instance when being placed. 
+>>>>>>> 3315049 ([post]: add ECS cpu memory article)
 - The sum of the `memoryReservation` of all containers in all the tasks running on a container instance, cannot exceed the available memory on that container instance.
 
 #### memory(hard limit)
@@ -43,7 +71,11 @@ Let's discuss what the differences, how these settings affect task scheduling an
 [The task definition document about memory setting](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html#container_definition_memory) mentioned `memory` is the hard limit (in MiB) of the container:
 
 - `memory` is the upper bound that the memory usage a container cannot go beyond.
+<<<<<<< HEAD
 - If the container exceed the `memory`, the container will be killed (by out-of-memory(OOM) killer of the Linux kernel which we will discuss later).
+=======
+- If the container exceed the `memory`, the container will be killed (by out-of-memory(OOM) killer of the Linux kernel which we will discuss later). 
+>>>>>>> 3315049 ([post]: add ECS cpu memory article)
 
 #### Notes for memoryReservation(soft limit) and memory(hard limit)
 
@@ -59,9 +91,15 @@ See below tables for the reservation and ceiling of the memory size a container 
 | `memoryReservation` only                | `memoryReservation` | total memory of the container instance or task memory size if configured            |
 | `memoryReservation` **and** `memory`<br>(`memory` must be greater than `memoryReservation`)   | `memoryReservation` | `memory`                                                                            |
 | `memory` only                           | `memory`            | `memory`                                                                            |
+<<<<<<< HEAD
 | no `memoryReservation` **nor** `memory` | none                | task-level memory size (and task-level memory size has to be configured, see below note) |
 
 note: If a task-level memory size is not specified, you must specify a non-zero integer for one or both of `memory` or `memoryReservation` in a container definition.
+=======
+| no `memoryReservation` **nor** `memory` | none                | task-level memory size (and task-level memory size has to be configured, see below note) | 
+
+note: If a task-level memory size is not specified, you must specify a non-zero integer for one or both of `memory` or `memoryReservation` in a container definition. 
+>>>>>>> 3315049 ([post]: add ECS cpu memory article)
 
 ### Out-Of-Memory(OOM) killer
 If a container exceed the `memory`(hard limit), the container will be killed by Out-Of-Memory(OOM) killer. OOM killer is a Linux kernel mechanism to make sure that the system still have enough memory to run.[^2]
@@ -124,6 +162,7 @@ With the information above, let's assume the following situations happen in your
 - The task size for memory is 512MB.
 - Container memory configuration:
 
+<<<<<<< HEAD
 | Container | Hard limit | Essential container |
 |:---------:|:----------:|:-------------------:|
 |     A     |   300 MB   |         Yes         |
@@ -131,10 +170,22 @@ With the information above, let's assume the following situations happen in your
 
 > If the `essential` parameter of a container is marked as `true`, and that container fails or stops for any reason, all other containers that are part of the task are stopped.[^6]
 {: .prompt-info }
+=======
+| Container | Hard limit |
+|:---------:|:----------:|
+|     A     |   300 MB   |
+|     B     |   300 MB   |
+
+notes: If the `essential` parameter of a container is marked as `true`, and that container fails or stops for any reason, all other containers that are part of the task are stopped.[^6]
+>>>>>>> 3315049 ([post]: add ECS cpu memory article)
 
 #### Scenario 1:
 
 - Container A reach hard limit
+<<<<<<< HEAD
+=======
+- Container A is the essential container
+>>>>>>> 3315049 ([post]: add ECS cpu memory article)
 - The total memory usage for container A and B do not reach the task size for memory.
 
 The container A will be killed by OOM, and the task will be stopped.
@@ -142,6 +193,10 @@ The container A will be killed by OOM, and the task will be stopped.
 #### Scenario 2
 
 - Container B reach hard limit
+<<<<<<< HEAD
+=======
+- Container B is not the essential container
+>>>>>>> 3315049 ([post]: add ECS cpu memory article)
 - The total memory usage for container A and B do not reach the task size for memory.
 
 The container B will be killed by OOM, and the task will not be stopped.
@@ -153,7 +208,11 @@ The container B will be killed by OOM, and the task will not be stopped.
 
 It may result in container A or B to be stopped by OOM, depending on which process in container A or B has the highest OOM score.
 
+<<<<<<< HEAD
 Of course, if the stopped container is Container A, as Container A is an essential container, the task will be stopped correspondingly.
+=======
+Of course, if the stopped container is an essential container, the task will be stopped correspondingly.
+>>>>>>> 3315049 ([post]: add ECS cpu memory article)
 
 
 ## CPU
@@ -170,7 +229,11 @@ ECS introduce an abstract term call CPU unit. The blog[^1] mentions below:
 
 The container-level CPU limit acts as a relative share or weight: Take the example from the blog[^1] :
 
+<<<<<<< HEAD
 A task running on a host with 8192 CPU units has two containers:
+=======
+A task running on a host with 8192 CPU units has two containers: 
+>>>>>>> 3315049 ([post]: add ECS cpu memory article)
 - containerA: assigned with 512 units
 - containerB: assigned with 1024 units
 
@@ -184,9 +247,13 @@ The blog[^1]  describe the following regarding CPU usages:
 - if containers are not using their allotted CPU units, other containers can use that capacity. When capacity is not used, any container can burst to use that spare capacity.
 - CPU shares control the amount of CPU capacity available when there is CPU contention; that is, multiple containers attempting to use the CPU at the same time.
 
+<<<<<<< HEAD
 > When you don’t specify any CPU units for a container, ECS intrinsically enforces two Linux CPU shares(which we will discuss later below) for the cgroup (which is the minimum allowed).
 {: .prompt-info }
 
+=======
+notes: When you don’t specify any CPU units for a container, ECS intrinsically enforces two Linux CPU shares(which we will discuss later below) for the cgroup (which is the minimum allowed).
+>>>>>>> 3315049 ([post]: add ECS cpu memory article)
 
 ### Task-level: hard limit
 
@@ -232,10 +299,17 @@ As the container resource limit is implemented by cgroup, we can actually check 
 
 From the cgroup document[^7], we can see that the following files regarding memory limit:
 
+<<<<<<< HEAD
 - `memory.soft_limit_in_bytes`: set/show soft limit of memory usage
 - `memory.limit_in_bytes`: set/show limit of memory usage
 
 Let's have a ECS task `602081644df34fb5bf1c5786ef261fe7` which is configured to have 1024 MiB task-level memory setting and the container-level has 128MiB soft limit. We can find these memory limit from cgroup settings.
+=======
+`memory.soft_limit_in_bytes`: set/show soft limit of memory usage
+`memory.limit_in_bytes`: set/show limit of memory usage
+
+Let's have a ECS task `602081644df34fb5bf1c5786ef261fe7` which is configured to have 1024 MiB task-level memory setting and the container-level has 128MiB soft limit. We can find these memory limit from cgroup settings. 
+>>>>>>> 3315049 ([post]: add ECS cpu memory article)
 
 #### Task-level memory limit
 
@@ -265,11 +339,19 @@ $ cat /sys/fs/cgroup/memory/ecs/602081644df34fb5bf1c5786ef261fe7/2624b365b6ea72e
 
 cgroup setting for CPU has different concept from memory. RedHat document gives a detail description about the cgroup setting for CPU[^8]:
 
+<<<<<<< HEAD
 - `cpu.shares` contains an integer value that specifies a ==relative share== of CPU time available to the tasks in a cgroup.
 
 > For example, tasks in two cgroups that have `cpu.shares` set to `100` will receive equal CPU time, but tasks in a cgroup that has `cpu.shares` set to `200` receive twice the CPU time of tasks in a cgroup where `cpu.shares` is set to `100`. The value specified in the `cpu.shares` file must be `2` or higher.
 
 - `cpu.cfs_period_us` specifies a period of time in microseconds (`µs`, represented here as "us") for how regularly a cgroup's access to CPU resources should be reallocated.
+=======
+- `cpu.shares` contains an integer value that specifies a ==relative share== of CPU time available to the tasks in a cgroup. 
+
+> For example, tasks in two cgroups that have `cpu.shares` set to `100` will receive equal CPU time, but tasks in a cgroup that has `cpu.shares` set to `200` receive twice the CPU time of tasks in a cgroup where `cpu.shares` is set to `100`. The value specified in the `cpu.shares` file must be `2` or higher.
+
+- `cpu.cfs_period_us` specifies a period of time in microseconds (`µs`, represented here as "us") for how regularly a cgroup's access to CPU resources should be reallocated. 
+>>>>>>> 3315049 ([post]: add ECS cpu memory article)
 - `cpu.cfs_quota_us` specifies the total amount of time in microseconds (µs, represented here as "us") for which all tasks in a cgroup can run during one period (as defined by cpu.cfs_period_us).
 - `nr_throttled`: number of times tasks in a cgroup have been throttled (that is, not allowed to run because they have exhausted all of the available time as specified by their quota).
 - `throttled_time`: the total time duration (in nanoseconds) for which tasks in a cgroup have been throttled.
@@ -388,6 +470,7 @@ The AWS blog[^1] does explain in detail about the memory and CPU management of A
 
 ## References
 
+<<<<<<< HEAD
 [^1]:  [How Amazon ECS manages CPU and memory resources](https://aws.amazon.com/blogs/containers/how-amazon-ecs-manages-cpu-and-memory-resources/)
 [^2]: [Out Of Memory Management](https://www.kernel.org/doc/gorman/html/understand/understand016.html)
 [^3]: [cgroups(7) - Linux manual page](https://man7.org/linux/man-pages/man7/cgroups.7.html)
@@ -397,3 +480,14 @@ The AWS blog[^1] does explain in detail about the memory and CPU management of A
 [^7]: [https://www.kernel.org/doc/Documentation/cgroup-v1/memory.txt](https://www.kernel.org/doc/Documentation/cgroup-v1/memory.txt)
 [^8]: [3.2. cpu Red Hat Enterprise Linux 6](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/6/html/resource_management_guide/sec-cpu)
 [^9]: [https://www.kernel.org/doc/Documentation/scheduler/sched-bwc.txt](https://www.kernel.org/doc/Documentation/scheduler/sched-bwc.txt)
+=======
+[^1]:  [How Amazon ECS manages CPU and memory resources | Containers](https://aws.amazon.com/blogs/containers/how-amazon-ecs-manages-cpu-and-memory-resources/)
+[^2]: [Out Of Memory Management](https://www.kernel.org/doc/gorman/html/understand/understand016.html)
+[^3]: [cgroups(7) - Linux manual page](https://man7.org/linux/man-pages/man7/cgroups.7.html)
+[^4]: [Runtime options with Memory, CPUs, and GPUs | Docker Documentation](https://docs.docker.com/config/containers/resource_constraints/#--memory-swap-details)
+[^5]: [Amazon ECS Now Supports Per-Container Swap Space Parameters](https://aws.amazon.com/about-aws/whats-new/2019/08/amazon-ecs-now-supports-per-container-swap-space-parameters/)
+[^6]: [Task definition parameters - Amazon Elastic Container Service](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html)
+[^7]: [https://www.kernel.org/doc/Documentation/cgroup-v1/memory.txt](https://www.kernel.org/doc/Documentation/cgroup-v1/memory.txt)
+[^8]: [3.2. cpu Red Hat Enterprise Linux 6 | Red Hat Customer Portal](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/6/html/resource_management_guide/sec-cpu)
+[^9]: [https://www.kernel.org/doc/Documentation/scheduler/sched-bwc.txt](https://www.kernel.org/doc/Documentation/scheduler/sched-bwc.txt)
+>>>>>>> 3315049 ([post]: add ECS cpu memory article)

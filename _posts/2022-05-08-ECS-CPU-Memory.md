@@ -6,12 +6,6 @@ categories: [CSIE, Cloud, AWS]
 tags: [aws, ecs, memory, cpu]
 crosspost_to_medium: true
 
-=======
-title: [AWS][ECS] What I learned about CPU and memory management of Amazon ECS
-date: 2022-05-08 00:06:00 +0000
-categories: [CSIE, Cloud, AWS]
-tags: [aws, ecs, memory, cpu]
->>>>>>> 3315049 ([post]: add ECS cpu memory article)
 ---
 
 ## Introduction
@@ -30,7 +24,6 @@ And we are going to talk about how the task and container access and share the C
 ## Memory
 
 For memory management, ECS provides the configuration of two levels:
-- container-level: `memoryReservation` (soft limit) and `memory` (hard limit)
 - container-level: `memoryReservation` (soft limit) and `memory` (hard limit)
 - task-level: `memory` (hard limit)
 
@@ -398,12 +391,12 @@ The AWS blog[^1] does explain in detail about the memory and CPU management of A
 
 ## References
 
-[^1]:  [How Amazon ECS manages CPU and memory resources | Containers](https://aws.amazon.com/blogs/containers/how-amazon-ecs-manages-cpu-and-memory-resources/)
+[^1]:  [How Amazon ECS manages CPU and memory resources](https://aws.amazon.com/blogs/containers/how-amazon-ecs-manages-cpu-and-memory-resources/)
 [^2]: [Out Of Memory Management](https://www.kernel.org/doc/gorman/html/understand/understand016.html)
 [^3]: [cgroups(7) - Linux manual page](https://man7.org/linux/man-pages/man7/cgroups.7.html)
-[^4]: [Runtime options with Memory, CPUs, and GPUs | Docker Documentation](https://docs.docker.com/config/containers/resource_constraints/#--memory-swap-details)
+[^4]: [Runtime options with Memory, CPUs, and GPUs](https://docs.docker.com/config/containers/resource_constraints/#--memory-swap-details)
 [^5]: [Amazon ECS Now Supports Per-Container Swap Space Parameters](https://aws.amazon.com/about-aws/whats-new/2019/08/amazon-ecs-now-supports-per-container-swap-space-parameters/)
 [^6]: [Task definition parameters - Amazon Elastic Container Service](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html)
 [^7]: [https://www.kernel.org/doc/Documentation/cgroup-v1/memory.txt](https://www.kernel.org/doc/Documentation/cgroup-v1/memory.txt)
-[^8]: [3.2. cpu Red Hat Enterprise Linux 6 | Red Hat Customer Portal](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/6/html/resource_management_guide/sec-cpu)
+[^8]: [3.2. cpu Red Hat Enterprise Linux 6](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/6/html/resource_management_guide/sec-cpu)
 [^9]: [https://www.kernel.org/doc/Documentation/scheduler/sched-bwc.txt](https://www.kernel.org/doc/Documentation/scheduler/sched-bwc.txt)

@@ -1,6 +1,6 @@
 ---
 
-title: [AWS][ECS] What I learned about CPU and memory management of Amazon ECS
+title: '[AWS][ECS] What I learned about CPU and memory management of Amazon ECS'
 date: 2022-05-08 00:06:00 +0000
 categories: [CSIE, Cloud, AWS]
 tags: [aws, ecs, memory, cpu]

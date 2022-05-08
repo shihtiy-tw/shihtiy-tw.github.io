@@ -8,14 +8,14 @@ tags: [aws, ecs, memory, cpu]
 
 ## Introduction
 
-This article will go through what I learned from [How Amazon ECS manages CPU and memory resources | Containers](https://aws.amazon.com/blogs/containers/how-amazon-ecs-manages-cpu-and-memory-resources/) and few things I add about the CPU and memory management of Amazon ECS.
+This article will go through what I learned from [How Amazon ECS manages CPU and memory resources](https://aws.amazon.com/blogs/containers/how-amazon-ecs-manages-cpu-and-memory-resources/) and few things I add about the CPU and memory management of Amazon ECS.
 
 ## Two General Rules
 
 The blog[^1] mentioned that there are two general rules of thumb with containers:
 
-- unless otherwise restricted and capped, ==a container gets access to all the CPU and memory capacity available on a given host (operating system).==
-- unless otherwise protected and guaranteed, ==all containers share CPU, memory, and other resources on a given host (operating system)== in the same way that other processes running on that host share those resources.
+- unless otherwise restricted and capped, a container gets access to all the CPU and memory capacity available on a given host (operating system).
+- unless otherwise protected and guaranteed, all containers share CPU, memory, and other resources on a given host (operating system) in the same way that other processes running on that host share those resources.
 
 And we are going to talk about how the task and container access and share the CPU and memory resources with the related configuration defined in a task definition.
 
@@ -385,12 +385,12 @@ The AWS blog[^1] does explain in detail about the memory and CPU management of A
 
 ## References
 
-[^1]:  [How Amazon ECS manages CPU and memory resources | Containers](https://aws.amazon.com/blogs/containers/how-amazon-ecs-manages-cpu-and-memory-resources/)
+[^1]:  [How Amazon ECS manages CPU and memory resources](https://aws.amazon.com/blogs/containers/how-amazon-ecs-manages-cpu-and-memory-resources/)
 [^2]: [Out Of Memory Management](https://www.kernel.org/doc/gorman/html/understand/understand016.html)
 [^3]: [cgroups(7) - Linux manual page](https://man7.org/linux/man-pages/man7/cgroups.7.html)
-[^4]: [Runtime options with Memory, CPUs, and GPUs | Docker Documentation](https://docs.docker.com/config/containers/resource_constraints/#--memory-swap-details)
+[^4]: [Runtime options with Memory, CPUs, and GPUs](https://docs.docker.com/config/containers/resource_constraints/#--memory-swap-details)
 [^5]: [Amazon ECS Now Supports Per-Container Swap Space Parameters](https://aws.amazon.com/about-aws/whats-new/2019/08/amazon-ecs-now-supports-per-container-swap-space-parameters/)
 [^6]: [Task definition parameters - Amazon Elastic Container Service](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html)
 [^7]: [https://www.kernel.org/doc/Documentation/cgroup-v1/memory.txt](https://www.kernel.org/doc/Documentation/cgroup-v1/memory.txt)
-[^8]: [3.2. cpu Red Hat Enterprise Linux 6 | Red Hat Customer Portal](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/6/html/resource_management_guide/sec-cpu)
+[^8]: [3.2. cpu Red Hat Enterprise Linux 6](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/6/html/resource_management_guide/sec-cpu)
 [^9]: [https://www.kernel.org/doc/Documentation/scheduler/sched-bwc.txt](https://www.kernel.org/doc/Documentation/scheduler/sched-bwc.txt)

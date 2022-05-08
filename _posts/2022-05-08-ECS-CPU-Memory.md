@@ -122,17 +122,17 @@ With the information above, let's assume the following situations happen in your
 - The task size for memory is 512MB.
 - Container memory configuration:
 
-| Container | Hard limit |
-|:---------:|:----------:|
-|     A     |   300 MB   |
-|     B     |   300 MB   |
+| Container | Hard limit | Essential container |
+|:---------:|:----------:|:-------------------:|
+|     A     |   300 MB   |         Yes         |
+|     B     |   300 MB   |         No          |
 
-notes: If the `essential` parameter of a container is marked as `true`, and that container fails or stops for any reason, all other containers that are part of the task are stopped.[^6]
+> If the `essential` parameter of a container is marked as `true`, and that container fails or stops for any reason, all other containers that are part of the task are stopped.[^6]
+{: .prompt-info }
 
 #### Scenario 1:
 
 - Container A reach hard limit
-- Container A is the essential container
 - The total memory usage for container A and B do not reach the task size for memory.
 
 The container A will be killed by OOM, and the task will be stopped.
@@ -140,7 +140,6 @@ The container A will be killed by OOM, and the task will be stopped.
 #### Scenario 2
 
 - Container B reach hard limit
-- Container B is not the essential container
 - The total memory usage for container A and B do not reach the task size for memory.
 
 The container B will be killed by OOM, and the task will not be stopped.
@@ -152,7 +151,7 @@ The container B will be killed by OOM, and the task will not be stopped.
 
 It may result in container A or B to be stopped by OOM, depending on which process in container A or B has the highest OOM score.
 
-Of course, if the stopped container is an essential container, the task will be stopped correspondingly.
+Of course, if the stopped container is Container A, as Container A is an essential container, the task will be stopped correspondingly.
 
 
 ## CPU
@@ -183,7 +182,9 @@ The blog[^1]  describe the following regarding CPU usages:
 - if containers are not using their allotted CPU units, other containers can use that capacity. When capacity is not used, any container can burst to use that spare capacity.
 - CPU shares control the amount of CPU capacity available when there is CPU contention; that is, multiple containers attempting to use the CPU at the same time.
 
-notes: When you don’t specify any CPU units for a container, ECS intrinsically enforces two Linux CPU shares(which we will discuss later below) for the cgroup (which is the minimum allowed).
+> When you don’t specify any CPU units for a container, ECS intrinsically enforces two Linux CPU shares(which we will discuss later below) for the cgroup (which is the minimum allowed).
+{: .prompt-info }
+
 
 ### Task-level: hard limit
 

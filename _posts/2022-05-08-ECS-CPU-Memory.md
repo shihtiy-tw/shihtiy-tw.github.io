@@ -229,8 +229,8 @@ As the container resource limit is implemented by cgroup, we can actually check 
 
 From the cgroup document[^7], we can see that the following files regarding memory limit:
 
-`memory.soft_limit_in_bytes`: set/show soft limit of memory usage
-`memory.limit_in_bytes`: set/show limit of memory usage
+- `memory.soft_limit_in_bytes`: set/show soft limit of memory usage
+- `memory.limit_in_bytes`: set/show limit of memory usage
 
 Let's have a ECS task `602081644df34fb5bf1c5786ef261fe7` which is configured to have 1024 MiB task-level memory setting and the container-level has 128MiB soft limit. We can find these memory limit from cgroup settings. 
 

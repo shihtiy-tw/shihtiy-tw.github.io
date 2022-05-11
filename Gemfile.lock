@@ -52,6 +52,7 @@ GEM
       terminal-table (~> 2.0)
     jekyll-archives (2.2.1)
       jekyll (>= 3.6, < 5.0)
+    jekyll-crosspost-to-medium (0.1.14)
     jekyll-paginate (1.1.0)
     jekyll-redirect-from (0.16.0)
       jekyll (>= 3.3, < 5.0)
@@ -112,6 +113,7 @@ PLATFORMS
 
 DEPENDENCIES
   html-proofer (~> 3.18)
+  jekyll-crosspost-to-medium
   jekyll-target-blank (~> 2.0)
   jekyll-theme-chirpy!
   tzinfo (~> 1.2)

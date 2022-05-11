@@ -172,3 +172,4 @@ jekyll-archives:
 
 plugins:
   - jekyll-target-blank
+  - jekyll-crosspost-to-medium

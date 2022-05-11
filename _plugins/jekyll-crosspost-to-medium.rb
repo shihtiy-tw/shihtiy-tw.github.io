@@ -78,13 +78,21 @@ module Jekyll
               content = post.content
               url = "#{@site.config['url']}#{post.url}"
               title = post.data['title']
+<<<<<<< HEAD
 
+=======
+              
+>>>>>>> 38e6351 ([config]: add crosspost for medium)
               published_at = backdate ? post.date : DateTime.now
 
               crosspost_payload(crossposted, post, content, title, url, published_at)
             end
           else
+<<<<<<< HEAD
 
+=======
+            
+>>>>>>> 38e6351 ([config]: add crosspost for medium)
             # post Jekyll commit 0c0aea3
             # https://github.com/jekyll/jekyll/commit/0c0aea3ad7d2605325d420a23d21729c5cf7cf88
             if defined? site.find_converter_instance
@@ -112,11 +120,19 @@ module Jekyll
 
               url = "#{@site.config['url']}#{post.url}"
               title = post.title
+<<<<<<< HEAD
 
               published_at = backdate ? post.date : DateTime.now
 
               crosspost_payload(crossposted, post, content, title, url, published_at)
 
+=======
+              
+              published_at = backdate ? post.date : DateTime.now
+
+              crosspost_payload(crossposted, post, content, title, url, published_at)
+              
+>>>>>>> 38e6351 ([config]: add crosspost for medium)
             end
           end
         end
@@ -134,6 +150,14 @@ module Jekyll
       # Save canonical URL
       canonical_url = url
 
+<<<<<<< HEAD
+=======
+      # Prepend the title and add a link back to originating site
+      content.prepend("<h1>#{title}</h1>")
+      # Append a canonical link and text
+      # TODO Accept a position option, e.g., top, bottom.
+      #
+>>>>>>> 38e6351 ([config]: add crosspost for medium)
       # Use the user's config if it exists
       if @settings['text']
           canonical_text = "#{@settings['text']}"
@@ -142,6 +166,7 @@ module Jekyll
       else
           canonical_text = "<p><i>This article was originally posted <a href=\"#{url}\" rel=\"canonical\">on my own site</a>.</i></p>"
       end
+<<<<<<< HEAD
       # content << canonical_text
 
       prepend_text = "<h1>#{title}</h1><br><br>" + canonical_text
@@ -151,6 +176,9 @@ module Jekyll
       # Append a canonical link and text
       # TODO Accept a position option, e.g., top, bottom.
       #
+=======
+      content << canonical_text
+>>>>>>> 38e6351 ([config]: add crosspost for medium)
 
       # Strip domain name from the URL we check against
       url = url.sub(/^#{@site.config['url']}?/,'')
@@ -216,5 +244,9 @@ module Jekyll
     end
 
   end
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> 38e6351 ([config]: add crosspost for medium)
 end

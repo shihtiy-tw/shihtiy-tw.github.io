@@ -1,0 +1,292 @@
+<!DOCTYPE html><html lang="en" ><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><meta name="day-prompt" content="days ago"><meta name="hour-prompt" content="hours ago"><meta name="minute-prompt" content="minutes ago"><meta name="justnow-prompt" content="just now"><meta name="generator" content="Jekyll v4.2.1" /><meta property="og:title" content="[Linux] Why do I run into ‘…too long for Unix domain socket’ when git clone with SSH?" /><meta property="og:locale" content="en" /><meta name="description" content="Summary" /><meta property="og:description" content="Summary" /><link rel="canonical" href="https://shihtiy.com/posts/too-long-for-Unix-domain-socket/" /><meta property="og:url" content="https://shihtiy.com/posts/too-long-for-Unix-domain-socket/" /><meta property="og:site_name" content="Shih-Ting, Yuan" /><meta property="og:type" content="article" /><meta property="article:published_time" content="2021-12-28T22:00:00+00:00" /><meta name="twitter:card" content="summary" /><meta property="twitter:title" content="[Linux] Why do I run into ‘…too long for Unix domain socket’ when git clone with SSH?" /><meta name="twitter:site" content="@shihtiy" /><meta name="google-site-verification" content="google_meta_tag_verification" /> <script type="application/ld+json"> {"mainEntityOfPage":{"@type":"WebPage","@id":"https://shihtiy.com/posts/too-long-for-Unix-domain-socket/"},"description":"Summary","url":"https://shihtiy.com/posts/too-long-for-Unix-domain-socket/","@type":"BlogPosting","headline":"[Linux] Why do I run into ‘…too long for Unix domain socket’ when git clone with SSH?","dateModified":"2022-05-11T21:34:11+01:00","datePublished":"2021-12-28T22:00:00+00:00","@context":"https://schema.org"}</script><title>[Linux] Why do I run into '...too long for Unix domain socket' when git clone with SSH? | Shih-Ting, Yuan</title><link rel="apple-touch-icon" sizes="180x180" href="/assets/img/favicons/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicons/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicons/favicon-16x16.png"><link rel="manifest" href="/assets/img/favicons/site.webmanifest"><link rel="shortcut icon" href="/assets/img/favicons/favicon.ico"><meta name="apple-mobile-web-app-title" content="Shih-Ting, Yuan"><meta name="application-name" content="Shih-Ting, Yuan"><meta name="msapplication-TileColor" content="#da532c"><meta name="msapplication-config" content="/assets/img/favicons/browserconfig.xml"><meta name="theme-color" content="#ffffff"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous"><link rel="dns-prefetch" href="https://fonts.gstatic.com"><link rel="preconnect" href="https://www.google-analytics.com" crossorigin="use-credentials"><link rel="dns-prefetch" href="https://www.google-analytics.com"><link rel="preconnect" href="https://www.googletagmanager.com" crossorigin="anonymous"><link rel="dns-prefetch" href="https://www.googletagmanager.com"><link rel="preconnect" href="https://cdn.jsdelivr.net"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.11.2/css/all.min.css"><link rel="stylesheet" href="/assets/css/style.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@1.0.1/dist/bootstrap-toc.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/magnific-popup@1.1.0/dist/magnific-popup.min.css"> <script src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script> <script type="text/javascript"> class ModeToggle { static get MODE_KEY() { return "mode"; } static get DARK_MODE() { return "dark"; } static get LIGHT_MODE() { return "light"; } static get ID() { return "mode-toggle"; } constructor() { if (this.hasMode) { if (this.isDarkMode) { if (!this.isSysDarkPrefer) { this.setDark(); } } else { if (this.isSysDarkPrefer) { this.setLight(); } } } let self = this; /* always follow the system prefers */ this.sysDarkPrefers.addEventListener("change", () => { if (self.hasMode) { if (self.isDarkMode) { if (!self.isSysDarkPrefer) { self.setDark(); } } else { if (self.isSysDarkPrefer) { self.setLight(); } } self.clearMode(); } self.notify(); }); } /* constructor() */ get sysDarkPrefers() { return window.matchMedia("(prefers-color-scheme: dark)"); } get isSysDarkPrefer() { return this.sysDarkPrefers.matches; } get isDarkMode() { return this.mode === ModeToggle.DARK_MODE; } get isLightMode() { return this.mode === ModeToggle.LIGHT_MODE; } get hasMode() { return this.mode != null; } get mode() { return sessionStorage.getItem(ModeToggle.MODE_KEY); } /* get the current mode on screen */ get modeStatus() { if (this.isDarkMode || (!this.hasMode && this.isSysDarkPrefer)) { return ModeToggle.DARK_MODE; } else { return ModeToggle.LIGHT_MODE; } } setDark() { $('html').attr(ModeToggle.MODE_KEY, ModeToggle.DARK_MODE); sessionStorage.setItem(ModeToggle.MODE_KEY, ModeToggle.DARK_MODE); } setLight() { $('html').attr(ModeToggle.MODE_KEY, ModeToggle.LIGHT_MODE); sessionStorage.setItem(ModeToggle.MODE_KEY, ModeToggle.LIGHT_MODE); } clearMode() { $('html').removeAttr(ModeToggle.MODE_KEY); sessionStorage.removeItem(ModeToggle.MODE_KEY); } /* Notify another plugins that the theme mode has changed */ notify() { window.postMessage({ direction: ModeToggle.ID, message: this.modeStatus }, "*"); } } /* ModeToggle */ const toggle = new ModeToggle(); function flipMode() { if (toggle.hasMode) { if (toggle.isSysDarkPrefer) { if (toggle.isLightMode) { toggle.clearMode(); } else { toggle.setLight(); } } else { if (toggle.isDarkMode) { toggle.clearMode(); } else { toggle.setDark(); } } } else { if (toggle.isSysDarkPrefer) { toggle.setLight(); } else { toggle.setDark(); } } toggle.notify(); } /* flipMode() */ </script><body data-spy="scroll" data-target="#toc"><div id="sidebar" class="d-flex flex-column align-items-end" lang="en">
+<div class="profile-wrapper text-center">
+<div id="avatar"> <a href="/" alt="avatar" class="mx-auto"> <img src="/assets/img/avatar/VKndUsfW_400x400.jpg" alt="avatar" onerror="this.style.display='none'"> </a>
+</div>
+<div class="site-title mt-3"> <a href="/">Shih-Ting, Yuan</a>
+</div>
+<div class="site-subtitle font-italic">Things as they really are.</div>
+</div>
+<ul class="w-100">
+<li class="nav-item"> <a href="/" class="nav-link"> <i class="fa-fw fas fa-home ml-xl-3 mr-xl-3 unloaded"></i> <span>HOME</span> </a>
+</li>
+<li class="nav-item"> <a href="/categories/" class="nav-link"> <i class="fa-fw fas fa-stream ml-xl-3 mr-xl-3 unloaded"></i> <span>CATEGORIES</span> </a>
+</li>
+<li class="nav-item"> <a href="/tags/" class="nav-link"> <i class="fa-fw fas fa-tag ml-xl-3 mr-xl-3 unloaded"></i> <span>TAGS</span> </a>
+</li>
+<li class="nav-item"> <a href="/archives/" class="nav-link"> <i class="fa-fw fas fa-archive ml-xl-3 mr-xl-3 unloaded"></i> <span>ARCHIVES</span> </a>
+</li>
+<li class="nav-item"> <a href="/about/" class="nav-link"> <i class="fa-fw fas fa-info-circle ml-xl-3 mr-xl-3 unloaded"></i> <span>ABOUT</span> </a>
+</li>
+</ul>
+<div class="sidebar-bottom mt-auto d-flex flex-wrap justify-content-center align-items-center"> <button class="mode-toggle btn" aria-label="Switch Mode"> <i class="fas fa-adjust"></i> </button> <span class="icon-border"></span> <a href="https://github.com/shihtiy-tw" aria-label="github" target="_blank" rel="noopener noreferrer"> <i class="fab fa-github"></i> </a> <a href="https://twitter.com/shihtiy" aria-label="twitter" target="_blank" rel="noopener noreferrer"> <i class="fab fa-twitter"></i> </a> <a href="https://www.linkedin.com/in/shih-ting-yuan/" aria-label="linkedin" target="_blank" rel="noopener noreferrer"> <i class="fab fa-linkedin"></i> </a> <a href="javascript:location.href%20=%20'mailto:'%20+%20%5B'shihtiy.tw','gmail.com'%5D.join('@')" aria-label="email"> <i class="fas fa-envelope"></i> </a> <a href="/feed.xml" aria-label="rss"> <i class="fas fa-rss"></i> </a>
+</div>
+</div><div id="topbar-wrapper" class="row justify-content-center topbar-down"><div id="topbar" class="col-11 d-flex h-100 align-items-center justify-content-between"> <span id="breadcrumb"> <span> <a href="/"> Home </a> </span> <span>[Linux] Why do I run into '...too long for Unix domain socket' when git clone with SSH?</span> </span> <i id="sidebar-trigger" class="fas fa-bars fa-fw"></i><div id="topbar-title"> Post</div>
+<i id="search-trigger" class="fas fa-search fa-fw"></i> <span id="search-wrapper" class="align-items-center"> <i class="fas fa-search fa-fw"></i> <input class="form-control" id="search-input" type="search" aria-label="search" autocomplete="off" placeholder="Search..."> <i class="fa fa-times-circle fa-fw" id="search-cleaner"></i> </span> <span id="search-cancel">Cancel</span>
+</div></div><div id="main-wrapper">
+<div id="main">
+<div class="row">
+<div id="core-wrapper" class="col-12 col-lg-11 col-xl-8"><div class="post pl-1 pr-1 pl-sm-2 pr-sm-2 pl-md-4 pr-md-4">
+<h1 data-toc-skip>[Linux] Why do I run into '...too long for Unix domain socket' when git clone with SSH?</h1>
+<div class="post-meta text-muted">
+<div> By <em> <a href="https://twitter.com/shihtiy" target="_blank" rel="noopener noreferrer">Shih-Ting, Yuan</a> </em>
+</div>
+<div class="d-flex"><div> <span> Posted <em class="timeago" date="2021-12-28 22:00:00 +0000" data-toggle="tooltip" data-placement="bottom" title="Tue, Dec 28, 2021, 10:00 PM +0000">Dec 28, 2021</em> </span> <span> Updated <em class="timeago" date="2022-05-11 20:34:11 +0000 " data-toggle="tooltip" data-placement="bottom" title="Wed, May 11, 2022, 8:34 PM +0000">May 11</em> </span> <span class="readtime" data-toggle="tooltip" data-placement="bottom" title="542 words"> <em>3 min</em> read</span>
+</div></div>
+</div>
+<div class="post-content">
+<h2 id="summary">Summary<a href="#summary"><i class="fas fa-hashtag"></i></a>
+</h2>
+<p>This article will go through why we may will run into <code class="language-plaintext highlighter-rouge">... too long for Unix domain socket</code> issue when git clone with SSH after they configure the <code class="language-plaintext highlighter-rouge">ControlMaster</code> and <code class="language-plaintext highlighter-rouge">ControlPath</code> to accelerate the SSH connection.</p>
+<h2 id="scenario">Scenario<a href="#scenario"><i class="fas fa-hashtag"></i></a>
+</h2>
+<p>When using SSH, people may want to speed up the SSH connection establishment with configuration of ControlMaster and ControlPath. According to the <a href="https://linux.die.net/man/5/ssh_config" target="_blank" rel="noopener noreferrer">ssh_config man page</a>:</p>
+<div class="language-plaintext nolineno highlighter-rouge">
+<div class="code-header"> <span label-text="Plaintext"><i class="fas fa-code small"></i></span> <button aria-label="copy" title-succeed="Copied!"><i class="far fa-clipboard"></i></button>
+</div>
+<div class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td>
+<td class="rouge-code"><pre>ControlMaster
+Enables the sharing of multiple sessions over a single network connection...
+
+ControlPath
+Specify the path to the control socket used for connection sharing as described in the ControlMaster section above or the string ''none'' to disable connection sharing...
+</pre></td>
+</tr></tbody></table></code></div>
+</div>
+<p>This means that with multiple SSH session with the control socket to speed up the SSH connection establishment.</p>
+<h2 id="issue">Issue<a href="#issue"><i class="fas fa-hashtag"></i></a>
+</h2>
+<p>When we try to pull git repo from CodeCoommit, we may run into the following error:</p>
+<div class="language-bash highlighter-rouge">
+<div class="code-header"> <span label-text="Shell"><i class="fas fa-code small"></i></span> <button aria-label="copy" title-succeed="Copied!"><i class="far fa-clipboard"></i></button>
+</div>
+<div class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td>
+<td class="rouge-code"><pre>git clone ssh://git-codecommit.xxx.amazonaws.com/v1/repos/xxx
+Cloning into <span class="s1">'xxx'</span>...
+unix_listener: <span class="s2">"/Users/xxxxxxxxxx/.ssh/master-xxx@git-codecommit.xxx:22"</span> too long <span class="k">for </span>Unix domain socket
+fatal: Could not <span class="nb">read </span>from remote repository.
+</pre></td>
+</tr></tbody></table></code></div>
+</div>
+<p>And from the ~/.ssh/config, we can see the following configuration:</p>
+<div class="language-config nolineno highlighter-rouge">
+<div class="code-header"> <span label-text="Config"><i class="fas fa-code small"></i></span> <button aria-label="copy" title-succeed="Copied!"><i class="far fa-clipboard"></i></button>
+</div>
+<div class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td>
+<td class="rouge-code"><pre><span class="n">host</span> *
+<span class="n">ControlMaster</span> <span class="n">auto</span>
+<span class="n">ControlPath</span> ~/.<span class="n">ssh</span>/<span class="n">master</span>-%<span class="n">r</span>@%<span class="n">h</span>:%<span class="n">p</span>
+</pre></td>
+</tr></tbody></table></code></div>
+</div>
+<h2 id="explanation">Explanation<a href="#explanation"><i class="fas fa-hashtag"></i></a>
+</h2>
+<h3 id="unix-socket-path-length">Unix socket path length<a href="#unix-socket-path-length"><i class="fas fa-hashtag"></i></a>
+</h3>
+<p>The messages <code class="language-plaintext highlighter-rouge">unix_listener: ... too long for Unix domain socket</code> is from the function to create socket (<a href="https://github.com/openssh/openssh-portable/blob/9ada37d36003a77902e90a3214981e417457cf13/misc.c#L1070" target="_blank" rel="noopener noreferrer">source code</a>):</p>
+<div class="language-c nolineno highlighter-rouge">
+<div class="code-header"> <span label-text="C"><i class="fas fa-code small"></i></span> <button aria-label="copy" title-succeed="Copied!"><i class="far fa-clipboard"></i></button>
+</div>
+<div class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+</pre></td>
+<td class="rouge-code"><pre><span class="kt">int</span>
+<span class="nf">unix_listener</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">path</span><span class="p">,</span> <span class="kt">int</span> <span class="n">backlog</span><span class="p">,</span> <span class="kt">int</span> <span class="n">unlink_first</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="k">struct</span> <span class="n">sockaddr_un</span> <span class="n">sunaddr</span><span class="p">;</span>
+	<span class="kt">int</span> <span class="n">saved_errno</span><span class="p">,</span> <span class="n">sock</span><span class="p">;</span>
+
+	<span class="n">memset</span><span class="p">(</span><span class="o">&amp;</span><span class="n">sunaddr</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">sunaddr</span><span class="p">));</span>
+	<span class="n">sunaddr</span><span class="p">.</span><span class="n">sun_family</span> <span class="o">=</span> <span class="n">AF_UNIX</span><span class="p">;</span>
+	<span class="k">if</span> <span class="p">(</span><span class="n">strlcpy</span><span class="p">(</span><span class="n">sunaddr</span><span class="p">.</span><span class="n">sun_path</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">sunaddr</span><span class="p">.</span><span class="n">sun_path</span><span class="p">))</span> <span class="o">&gt;=</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">sunaddr</span><span class="p">.</span><span class="n">sun_path</span><span class="p">))</span> <span class="p">{</span>
+		<span class="n">error</span><span class="p">(</span><span class="s">"%s: </span><span class="se">\"</span><span class="s">%s</span><span class="se">\"</span><span class="s"> too long for Unix domain socket"</span><span class="p">,</span> <span class="n">__func__</span><span class="p">,</span>
+		    <span class="n">path</span><span class="p">);</span>
+		<span class="n">errno</span> <span class="o">=</span> <span class="n">ENAMETOOLONG</span><span class="p">;</span>
+		<span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+	<span class="p">}</span>
+</pre></td>
+</tr></tbody></table></code></div>
+</div>
+<p>We can see that if the socket path is longer then <code class="language-plaintext highlighter-rouge">sizeof(sunaddr.sun_path)</code>, and then we will get the error message <code class="language-plaintext highlighter-rouge">unix_listener: ... too long for Unix domain socket</code>. In unix socket man page, it describes that the length of sun_path is <code class="language-plaintext highlighter-rouge">108</code> char (<a href="https://linux.die.net/man/7/unix" target="_blank" rel="noopener noreferrer">source code</a>):</p>
+<div class="language-c nolineno highlighter-rouge">
+<div class="code-header"> <span label-text="C"><i class="fas fa-code small"></i></span> <button aria-label="copy" title-succeed="Copied!"><i class="far fa-clipboard"></i></button>
+</div>
+<div class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre></td>
+<td class="rouge-code"><pre><span class="cp">#define UNIX_PATH_MAX    108
+</span>
+<span class="k">struct</span> <span class="n">sockaddr_un</span> <span class="p">{</span>
+    <span class="n">sa_family_t</span> <span class="n">sun_family</span><span class="p">;</span>               <span class="cm">/* AF_UNIX */</span>
+    <span class="kt">char</span>        <span class="n">sun_path</span><span class="p">[</span><span class="n">UNIX_PATH_MAX</span><span class="p">];</span>  <span class="cm">/* pathname */</span>
+<span class="p">};</span>
+</pre></td>
+</tr></tbody></table></code></div>
+</div>
+<h3 id="ssh-config-for-controlpath">SSH config for ControlPath<a href="#ssh-config-for-controlpath"><i class="fas fa-hashtag"></i></a>
+</h3>
+<p>Why the socket path in the use case is longer than <code class="language-plaintext highlighter-rouge">108</code> char? When configuring the <code class="language-plaintext highlighter-rouge">ControlPath</code> parameter as <code class="language-plaintext highlighter-rouge">~/.ssh/master-%r@%h:%p</code>, according to the <a href="https://man.openbsd.org/ssh_config.5" target="_blank" rel="noopener noreferrer">ssh_config man page</a>, this means the following, :</p>
+<ul>
+<li>‘%h’: target host name</li>
+<li>‘%p’: the port</li>
+<li>‘%r’: the remote login username</li>
+</ul>
+<p>With AWS CodeCommit, the remote login user name is the SSH key ID, the host name is the CodeCommit endpoint<sup id="fnref:2" role="doc-noteref"><a href="#fn:2" class="footnote" rel="footnote">1</a></sup>. Due to this combination, it may be longer than the <code class="language-plaintext highlighter-rouge">108</code> char and cause the error message <code class="language-plaintext highlighter-rouge">unix_listener: ... too long for Unix domain socket</code>:</p>
+<div class="language-bash nolineno highlighter-rouge">
+<div class="code-header"> <span label-text="Shell"><i class="fas fa-code small"></i></span> <button aria-label="copy" title-succeed="Copied!"><i class="far fa-clipboard"></i></button>
+</div>
+<div class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td>
+<td class="rouge-code"><pre><span class="nv">$ </span><span class="nb">echo</span> <span class="s2">"/Users/xxxxxxxxxx/.ssh/master-xxx@git-codecommit.xxx:22"</span> | <span class="nb">wc</span> <span class="nt">-m</span>
+115
+</pre></td>
+</tr></tbody></table></code></div>
+</div>
+<h2 id="solution">Solution<a href="#solution"><i class="fas fa-hashtag"></i></a>
+</h2>
+<p>To solve the long <code class="language-plaintext highlighter-rouge">ControlPath</code> issue, we can replace the parameter with <code class="language-plaintext highlighter-rouge">%C</code> which is Hash of <code class="language-plaintext highlighter-rouge">%l%h%p%r</code><sup id="fnref:1" role="doc-noteref"><a href="#fn:1" class="footnote" rel="footnote">2</a></sup> and decrease the chance for <code class="language-plaintext highlighter-rouge">ControlPath</code> to be longer than <code class="language-plaintext highlighter-rouge">108</code> char:</p>
+<div class="language-config nolineno highlighter-rouge">
+<div class="code-header"> <span label-text="Config"><i class="fas fa-code small"></i></span> <button aria-label="copy" title-succeed="Copied!"><i class="far fa-clipboard"></i></button>
+</div>
+<div class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td>
+<td class="rouge-code"><pre><span class="n">host</span> *
+<span class="n">ControlMaster</span> <span class="n">auto</span>
+<span class="n">ControlPath</span> ~/.<span class="n">ssh</span>/<span class="n">master</span>-%<span class="n">C</span>
+</pre></td>
+</tr></tbody></table></code></div>
+</div>
+<p>We can see the length of the socket path is much less then the length limit and we can avoid the socket length issue with <code class="language-plaintext highlighter-rouge">ControlPath</code>:</p>
+<div class="language-bash nolineno highlighter-rouge">
+<div class="code-header"> <span label-text="Shell"><i class="fas fa-code small"></i></span> <button aria-label="copy" title-succeed="Copied!"><i class="far fa-clipboard"></i></button>
+</div>
+<div class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td>
+<td class="rouge-code"><pre><span class="nv">$ </span><span class="nb">ls</span> ~/.ssh | <span class="nb">grep </span>master
+master-e7f58eb55da9db1a90b39dba271ef9c92838e09a
+<span class="nv">$ </span><span class="nb">echo</span> <span class="s2">"/home/shihtiy/.ssh/master-e7f58eb55da9db1a90b39dba271ef9c92838e09a"</span> | <span class="nb">wc</span> <span class="nt">-m</span>
+67
+</pre></td>
+</tr></tbody></table></code></div>
+</div>
+<h2 id="references">References<a href="#references"><i class="fas fa-hashtag"></i></a>
+</h2>
+<div class="footnotes" role="doc-endnotes"><ol>
+<li id="fn:2" role="doc-endnote"><p><a href="https://docs.aws.amazon.com/codecommit/latest/userguide/setting-up-ssh-unixes.html" target="_blank" rel="noopener noreferrer">Setup steps for SSH connections to AWS CodeCommit repositories on Linux, macOS, or Unix </a> <a href="#fnref:2" class="reversefootnote" role="doc-backlink">↩</a></p></li>
+<li id="fn:1" role="doc-endnote"><p><a href="https://man.openbsd.org/ssh_config.5" target="_blank" rel="noopener noreferrer">ssh_config(5) - OpenBSD manual pages</a> <a href="#fnref:1" class="reversefootnote" role="doc-backlink">↩</a></p></li>
+</ol></div>
+</div>
+<div class="post-tail-wrapper text-muted">
+<div class="post-meta mb-3"> <i class="far fa-folder-open fa-fw mr-1"></i> <a href="/categories/csie/">CSIE</a>, <a href="/categories/linux/">Linux</a>
+</div>
+<div class="post-tags"> <i class="fa fa-tags fa-fw mr-1"></i> <a href="/tags/linux/" class="post-tag no-text-decoration">linux</a> <a href="/tags/ssh/" class="post-tag no-text-decoration">ssh</a> <a href="/tags/git/" class="post-tag no-text-decoration">git</a> <a href="/tags/socket/" class="post-tag no-text-decoration">socket</a>
+</div>
+<div class="post-tail-bottom d-flex justify-content-between align-items-center mt-3 pt-5 pb-2">
+<div class="license-wrapper"> This post is licensed under <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener noreferrer"> CC BY 4.0 </a> by the author.</div>
+<div class="share-wrapper"> <span class="share-label text-muted mr-1">Share</span> <span class="share-icons"> <a href="https://twitter.com/intent/tweet?text=%5BLinux%5D%20Why%20do%20I%20run%20into%20'...too%20long%20for%20Unix%20domain%20socket'%20when%20git%20clone%20with%20SSH?%20-%20Shih-Ting,%20Yuan&amp;url=https://shihtiy.com/posts/too-long-for-Unix-domain-socket/" data-toggle="tooltip" data-placement="top" title="Twitter" target="_blank" rel="noopener noreferrer" aria-label="Twitter"> <i class="fa-fw fab fa-twitter"></i> </a> <a href="https://www.facebook.com/sharer/sharer.php?title=%5BLinux%5D%20Why%20do%20I%20run%20into%20'...too%20long%20for%20Unix%20domain%20socket'%20when%20git%20clone%20with%20SSH?%20-%20Shih-Ting,%20Yuan&amp;u=https://shihtiy.com/posts/too-long-for-Unix-domain-socket/" data-toggle="tooltip" data-placement="top" title="Facebook" target="_blank" rel="noopener noreferrer" aria-label="Facebook"> <i class="fa-fw fab fa-facebook-square"></i> </a> <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://shihtiy.com/posts/too-long-for-Unix-domain-socket/" data-toggle="tooltip" data-placement="top" title="Linkedin" target="_blank" rel="noopener noreferrer" aria-label="Linkedin"> <i class="fa-fw fab fa-linkedin"></i> </a> <a href="https://telegram.me/share?text=%5BLinux%5D%20Why%20do%20I%20run%20into%20'...too%20long%20for%20Unix%20domain%20socket'%20when%20git%20clone%20with%20SSH?%20-%20Shih-Ting,%20Yuan&amp;url=https://shihtiy.com/posts/too-long-for-Unix-domain-socket/" data-toggle="tooltip" data-placement="top" title="Telegram" target="_blank" rel="noopener noreferrer" aria-label="Telegram"> <i class="fa-fw fab fa-telegram"></i> </a> <i id="copy-link" class="fa-fw fas fa-link small" data-toggle="tooltip" data-placement="top" title="Copy link" title-succeed="Link copied successfully!"> </i> </span>
+</div>
+</div>
+</div>
+</div></div>
+<div id="panel-wrapper" class="col-xl-3 pl-2 text-muted topbar-down">
+<div class="access">
+<div id="access-lastmod" class="post">
+<div class="panel-heading">Recent Update</div>
+<ul class="post-content pl-0 pb-1 ml-1 mt-2">
+<li><a href="/posts/too-long-for-Unix-domain-socket/">[Linux] Why do I run into '...too long for Unix domain socket' when git clone with SSH?</a></li>
+<li><a href="/posts/max-open-file-limit-for-system-service/">[Linux] Max open file limit with system service</a></li>
+<li><a href="/posts/NFS-Client-Port-Range/">[Linux] Port range for NFS client</a></li>
+<li><a href="/posts/CLB-Scaling-in-AZ/">[AWS][CLB] Which AZ will CLB scale?</a></li>
+<li><a href="/posts/ECS-calculate-CPU-utilization-metadata-endpoing/">[AWS][ECS] How to calculate CPU utilization from ECS endpoint?</a></li>
+</ul>
+</div>
+<div id="access-tags">
+<div class="panel-heading">Trending Tags</div>
+<div class="d-flex flex-wrap mt-3 mb-1 mr-3"> <a class="post-tag" href="/tags/ecs/">ecs</a> <a class="post-tag" href="/tags/linux/">linux</a> <a class="post-tag" href="/tags/aws/">aws</a> <a class="post-tag" href="/tags/cpu/">cpu</a> <a class="post-tag" href="/tags/clb/">clb</a> <a class="post-tag" href="/tags/elb/">elb</a> <a class="post-tag" href="/tags/firewall/">firewall</a> <a class="post-tag" href="/tags/git/">git</a> <a class="post-tag" href="/tags/ip/">ip</a> <a class="post-tag" href="/tags/memory/">memory</a>
+</div>
+</div>
+</div>
+<script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@1.0.1/dist/bootstrap-toc.min.js"></script><div id="toc-wrapper" class="pl-0 pr-4 mb-5">
+<div class="panel-heading pl-3 pt-2 mb-2">Contents</div>
+<nav id="toc" data-toggle="toc"></nav>
+</div>
+</div>
+</div>
+<div class="row"><div class="col-12 col-lg-11 col-xl-8"><div id="tail-wrapper" class="pl-1 pr-1 pl-sm-2 pr-sm-2 pl-md-4 pr-md-4">
+<div id="related-posts" class="mt-5 mb-2 mb-sm-4">
+<h3 class="pt-2 mt-1 mb-4 ml-1" data-toc-skip>Further Reading</h3>
+<div class="card-deck mb-4">
+<div class="card"> <a href="/posts/max-open-file-limit-for-system-service/"><div class="card-body"> <em class="timeago small" date="2021-12-29 15:50:02 +0000">Dec 29, 2021</em><h3 class="pt-0 mt-1 mb-3" data-toc-skip>[Linux] Max open file limit with system service</h3>
+<div class="text-muted small"><p> Introduction This article will go through an interesting configuration topics for: the max open file limit with system service (systemd daemon service) the relation between PAM (Pluggable Au...</p></div>
+</div></a>
+</div>
+<div class="card"> <a href="/posts/NFS-Client-Port-Range/"><div class="card-body"> <em class="timeago small" date="2021-12-30 16:17:17 +0000">Dec 30, 2021</em><h3 class="pt-0 mt-1 mb-3" data-toc-skip>[Linux] Port range for NFS client</h3>
+<div class="text-muted small"><p> Introduction This article will go through how NFS client choose the port for communication with NFS server. Scenario Network File System (NFS) is a protocol to allow a client to access files on ...</p></div>
+</div></a>
+</div>
+<div class="card"> <a href="/posts/CLB-Scaling-in-AZ/"><div class="card-body"> <em class="timeago small" date="2022-01-02 17:20:24 +0000">Jan 2</em><h3 class="pt-0 mt-1 mb-3" data-toc-skip>[AWS][CLB] Which AZ will CLB scale?</h3>
+<div class="text-muted small"><p> Introduction When under the following conditions: CLB enables multiple AZs. Cross-zone load balancing is disabled. Healthy backend instances only locate in one of the AZs. CLB DNS only r...</p></div>
+</div></a>
+</div>
+</div>
+</div>
+<div class="post-navigation d-flex justify-content-between"> <span class="btn btn-outline-primary disabled" prompt="Older"><p>-</p></span> <a href="/posts/max-open-file-limit-for-system-service/" class="btn btn-outline-primary" prompt="Newer"><p>[Linux] Max open file limit with system service</p></a>
+</div>
+<div id="disqus_thread" class="pt-2 pb-2"><p class="text-center text-muted small"> Comments powered by <a href="https://disqus.com/" target="_blank" rel="noopener noreferrer">Disqus</a>.</p></div>
+<script type="text/javascript"> var disqus_config = function () { this.page.url = 'https://shihtiy.com/posts/too-long-for-Unix-domain-socket/'; this.page.identifier = '/posts/too-long-for-Unix-domain-socket/'; }; /* Lazy loading */ var disqus_observer = new IntersectionObserver(function (entries) { if(entries[0].isIntersecting) { (function () { var d = document, s = d.createElement('script'); s.src = 'https://shihtiy.disqus.com/embed.js'; s.setAttribute('data-timestamp', +new Date()); (d.head || d.body).appendChild(s); })(); disqus_observer.disconnect(); } }, { threshold: [0] }); disqus_observer.observe(document.querySelector('#disqus_thread')); /* Auto switch theme */ function reloadDisqus() { /* Disqus hasn't been loaded */ if (typeof DISQUS === "undefined") { return; } if (document.readyState == 'complete') { DISQUS.reset({ reload: true, config: disqus_config }); } } const modeToggle = document.querySelector(".mode-toggle"); if (typeof modeToggle !== "undefined") { /* modeToggle.addEventListener('click', reloadDisqus); // not pretty for 'color-scheme' */ window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', reloadDisqus); } </script>
+</div></div></div>
+<footer class="d-flex w-100 justify-content-center"><div class="d-flex justify-content-between align-items-center text-muted">
+<div class="footer-left"><p class="mb-0"> © 2022 <a href="https://twitter.com/shihtiy" target="_blank" rel="noopener noreferrer">Shih-Ting, Yuan</a>. <span data-toggle="tooltip" data-placement="top" title="Except where otherwise noted, the blog posts on this site are licensed under the Creative Commons Attribution 4.0 International (CC BY 4.0) License by the author.">Some rights reserved.</span></p></div>
+<div class="footer-right"><p class="mb-0"> Powered by <a href="https://jekyllrb.com" target="_blank" rel="noopener noreferrer">Jekyll</a> with <a href="https://github.com/cotes2020/jekyll-theme-chirpy" target="_blank" rel="noopener noreferrer">Chirpy</a> theme.</p></div>
+</div></footer>
+</div>
+<div id="search-result-wrapper" class="d-flex justify-content-center unloaded"><div class="col-12 col-sm-11 post-content">
+<div id="search-hints"><div id="access-tags">
+<div class="panel-heading">Trending Tags</div>
+<div class="d-flex flex-wrap mt-3 mb-1 mr-3"> <a class="post-tag" href="/tags/ecs/">ecs</a> <a class="post-tag" href="/tags/linux/">linux</a> <a class="post-tag" href="/tags/aws/">aws</a> <a class="post-tag" href="/tags/cpu/">cpu</a> <a class="post-tag" href="/tags/clb/">clb</a> <a class="post-tag" href="/tags/elb/">elb</a> <a class="post-tag" href="/tags/firewall/">firewall</a> <a class="post-tag" href="/tags/git/">git</a> <a class="post-tag" href="/tags/ip/">ip</a> <a class="post-tag" href="/tags/memory/">memory</a>
+</div>
+</div></div>
+<div id="search-results" class="d-flex flex-wrap justify-content-center text-muted mt-3"></div>
+</div></div>
+</div><div id="mask"></div><a id="back-to-top" href="#" aria-label="back-to-top" class="btn btn-lg btn-box-shadow" role="button"> <i class="fas fa-angle-up"></i> </a> <script src="https://cdn.jsdelivr.net/npm/simple-jekyll-search@1.10.0/dest/simple-jekyll-search.min.js"></script> <script> SimpleJekyllSearch({ searchInput: document.getElementById('search-input'), resultsContainer: document.getElementById('search-results'), json: '/assets/js/data/search.json', searchResultTemplate: '<div class="pl-1 pr-1 pl-sm-2 pr-sm-2 pl-lg-4 pr-lg-4 pl-xl-0 pr-xl-0"> <a href="{url}">{title}</a><div class="post-meta d-flex flex-column flex-sm-row text-muted mt-1 mb-1"> {categories} {tags}</div><p>{snippet}</p></div>', noResultsText: '<p class="mt-5">Oops! No result founds.</p>', templateMiddleware: function(prop, value, template) { if (prop === 'categories') { if (value === '') { return `${value}`; } else { return `<div class="mr-sm-4"><i class="far fa-folder fa-fw"></i>${value}</div>`; } } if (prop === 'tags') { if (value === '') { return `${value}`; } else { return `<div><i class="fa fa-tag fa-fw"></i>${value}</div>`; } } } }); </script> <script src="https://cdn.jsdelivr.net/combine/npm/lozad/dist/lozad.min.js,npm/magnific-popup@1/dist/jquery.magnific-popup.min.js,npm/clipboard@2/dist/clipboard.min.js"></script> <script defer src="/assets/js/dist/post.min.js"></script> <script src="https://cdn.jsdelivr.net/combine/npm/popper.js@1.16.1,npm/bootstrap@4/dist/js/bootstrap.min.js"></script> <script defer src="/app.js"></script> <script defer src="https://www.googletagmanager.com/gtag/js?id=G-1HNJH4QWWY"></script> <script> document.addEventListener("DOMContentLoaded", function(event) { window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-1HNJH4QWWY'); }); </script>

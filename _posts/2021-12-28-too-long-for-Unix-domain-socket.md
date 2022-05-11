@@ -1,9 +1,11 @@
 ---
+
 title: "[Linux] Why do I run into '...too long for Unix domain socket' when git clone with SSH?"
 categories: [CSIE, Linux]
 date: 2021-12-28 22:00:00 +0000
 tags: [linux, ssh, git, socket]
 crosspost_to_medium: true
+
 ---
 
 ## Summary
@@ -21,6 +23,7 @@ Enables the sharing of multiple sessions over a single network connection...
 ControlPath
 Specify the path to the control socket used for connection sharing as described in the ControlMaster section above or the string ''none'' to disable connection sharing...
 ```
+{: .nolineno }
 
 This means that with multiple SSH session with the control socket to speed up the SSH connection establishment.
 
@@ -42,6 +45,7 @@ host *
 ControlMaster auto
 ControlPath ~/.ssh/master-%r@%h:%p
 ```
+{: .nolineno }
 
 ## Explanation
 
@@ -65,6 +69,7 @@ unix_listener(const char *path, int backlog, int unlink_first)
 		return -1;
 	}
 ```
+{: .nolineno }
 
 We can see that if the socket path is longer then `sizeof(sunaddr.sun_path)`, and then we will get the error message `unix_listener: ... too long for Unix domain socket`. In unix socket man page, it describes that the length of sun_path is `108` char ([source code](https://linux.die.net/man/7/unix)):
 
@@ -76,6 +81,7 @@ struct sockaddr_un {
     char        sun_path[UNIX_PATH_MAX];  /* pathname */
 };
 ```
+{: .nolineno }
 
 ### SSH config for ControlPath
 
@@ -91,6 +97,7 @@ With AWS CodeCommit, the remote login user name is the SSH key ID, the host name
 $ echo "/Users/xxxxxxxxxx/.ssh/master-xxx@git-codecommit.xxx:22" | wc -m
 115
 ```
+{: .nolineno }
 
 ## Solution
 
@@ -101,6 +108,7 @@ host *
 ControlMaster auto
 ControlPath ~/.ssh/master-%C
 ```
+{: .nolineno }
 
 We can see the length of the socket path is much less then the length limit and we can avoid the socket length issue with `ControlPath`:
 
@@ -110,6 +118,7 @@ master-e7f58eb55da9db1a90b39dba271ef9c92838e09a
 $ echo "/home/shihtiy/.ssh/master-e7f58eb55da9db1a90b39dba271ef9c92838e09a" | wc -m
 67
 ```
+{: .nolineno }
 
 ## References
 

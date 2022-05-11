@@ -24,4 +24,4 @@ gem "webrick", "~> 1.7"
 # New tab for link
 gem 'jekyll-target-blank', '~> 2.0'
 
-gem 'jekyll-crosspost-to-medium'
+

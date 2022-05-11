@@ -3,7 +3,9 @@
 title: '[AWS][ECS] Difference between storage_stats and blkio_stats from ECS metadata endpoint'
 date: 2022-04-19 00:30:00 +0100
 categories: [CSIE, Cloud, AWS]
-tags: [ECS, Windows]
+tags: [ecs, windows]
+crosspost_to_medium: true
+
 ---
 
 ## Introduction / Summary
@@ -47,7 +49,7 @@ type StorageStats struct {
 
 ### ECS task on Windows
 
-As I only saw that `storage_stats` is for Windows from the code comments, I need to confirm this behaviour. Therefore, I launched an ECS task on Windows and accessed the ECS metadata endpoint from host level. We can see that `storage_stats` has value and `blkio_stats` has no value: 
+As I only saw that `storage_stats` is for Windows from the code comments, I need to confirm this behaviour. Therefore, I launched an ECS task on Windows and accessed the ECS metadata endpoint from host level. We can see that `storage_stats` has value and `blkio_stats` has no value:
 
 ```
 # on windows
@@ -98,7 +100,7 @@ $ curl ${ECS_CONTAINER_METADATA_URI_V4}/task/stats
 ...
         "num_procs": 0,
         "storage_stats": {},
-        
+
 ```
 
 ### AWS Document for ECS task on Windows
@@ -128,7 +130,7 @@ We can also see that `storage_stats` has metrics in the test stats for windows f
 
 ## Summary
 
-As people may use other monitoring tool like datadog to access ECS metadata point to get resource usage metrics and question why the field is empty[^1], we can see that it is expected to see the field `storage_stats` to be empty if the container is not on Windows. 
+As people may use other monitoring tool like datadog to access ECS metadata point to get resource usage metrics and question why the field is empty[^1], we can see that it is expected to see the field `storage_stats` to be empty if the container is not on Windows.
 
 ## References
 

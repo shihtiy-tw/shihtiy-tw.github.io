@@ -4,6 +4,8 @@ title: '[AWS][ECS] What I learned about CPU and memory management of Amazon ECS'
 date: 2022-05-08 00:06:00 +0000
 categories: [CSIE, Cloud, AWS]
 tags: [aws, ecs, memory, cpu]
+crosspost_to_medium: true
+
 ---
 
 ## Introduction
@@ -22,18 +24,18 @@ And we are going to talk about how the task and container access and share the C
 ## Memory
 
 For memory management, ECS provides the configuration of two levels:
-- container-level: `memoryReservation` (soft limit) and `memory` (hard limit) 
+- container-level: `memoryReservation` (soft limit) and `memory` (hard limit)
 - task-level: `memory` (hard limit)
 
 Let's discuss what the differences, how these settings affect task scheduling and some scenarios of these different memory setting.
 
-### Container-level: memoryReservation(soft limit) and memory(hard limit) 
+### Container-level: memoryReservation(soft limit) and memory(hard limit)
 
 #### memoryReservation(soft limit)
 
 [The task definition document about memory setting](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html#container_definition_memory) mentioned that `memoryReservation` is a soft limit (in MiB):
 
-- This option indicates the memory size that a task needs on a container instance when being placed. 
+- This option indicates the memory size that a task needs on a container instance when being placed.
 - The sum of the `memoryReservation` of all containers in all the tasks running on a container instance, cannot exceed the available memory on that container instance.
 
 #### memory(hard limit)
@@ -41,7 +43,7 @@ Let's discuss what the differences, how these settings affect task scheduling an
 [The task definition document about memory setting](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html#container_definition_memory) mentioned `memory` is the hard limit (in MiB) of the container:
 
 - `memory` is the upper bound that the memory usage a container cannot go beyond.
-- If the container exceed the `memory`, the container will be killed (by out-of-memory(OOM) killer of the Linux kernel which we will discuss later). 
+- If the container exceed the `memory`, the container will be killed (by out-of-memory(OOM) killer of the Linux kernel which we will discuss later).
 
 #### Notes for memoryReservation(soft limit) and memory(hard limit)
 
@@ -57,9 +59,9 @@ See below tables for the reservation and ceiling of the memory size a container 
 | `memoryReservation` only                | `memoryReservation` | total memory of the container instance or task memory size if configured            |
 | `memoryReservation` **and** `memory`<br>(`memory` must be greater than `memoryReservation`)   | `memoryReservation` | `memory`                                                                            |
 | `memory` only                           | `memory`            | `memory`                                                                            |
-| no `memoryReservation` **nor** `memory` | none                | task-level memory size (and task-level memory size has to be configured, see below note) | 
+| no `memoryReservation` **nor** `memory` | none                | task-level memory size (and task-level memory size has to be configured, see below note) |
 
-note: If a task-level memory size is not specified, you must specify a non-zero integer for one or both of `memory` or `memoryReservation` in a container definition. 
+note: If a task-level memory size is not specified, you must specify a non-zero integer for one or both of `memory` or `memoryReservation` in a container definition.
 
 ### Out-Of-Memory(OOM) killer
 If a container exceed the `memory`(hard limit), the container will be killed by Out-Of-Memory(OOM) killer. OOM killer is a Linux kernel mechanism to make sure that the system still have enough memory to run.[^2]
@@ -168,7 +170,7 @@ ECS introduce an abstract term call CPU unit. The blog[^1] mentions below:
 
 The container-level CPU limit acts as a relative share or weight: Take the example from the blog[^1] :
 
-A task running on a host with 8192 CPU units has two containers: 
+A task running on a host with 8192 CPU units has two containers:
 - containerA: assigned with 512 units
 - containerB: assigned with 1024 units
 
@@ -233,7 +235,7 @@ From the cgroup document[^7], we can see that the following files regarding memo
 - `memory.soft_limit_in_bytes`: set/show soft limit of memory usage
 - `memory.limit_in_bytes`: set/show limit of memory usage
 
-Let's have a ECS task `602081644df34fb5bf1c5786ef261fe7` which is configured to have 1024 MiB task-level memory setting and the container-level has 128MiB soft limit. We can find these memory limit from cgroup settings. 
+Let's have a ECS task `602081644df34fb5bf1c5786ef261fe7` which is configured to have 1024 MiB task-level memory setting and the container-level has 128MiB soft limit. We can find these memory limit from cgroup settings.
 
 #### Task-level memory limit
 
@@ -263,11 +265,11 @@ $ cat /sys/fs/cgroup/memory/ecs/602081644df34fb5bf1c5786ef261fe7/2624b365b6ea72e
 
 cgroup setting for CPU has different concept from memory. RedHat document gives a detail description about the cgroup setting for CPU[^8]:
 
-- `cpu.shares` contains an integer value that specifies a ==relative share== of CPU time available to the tasks in a cgroup. 
+- `cpu.shares` contains an integer value that specifies a ==relative share== of CPU time available to the tasks in a cgroup.
 
 > For example, tasks in two cgroups that have `cpu.shares` set to `100` will receive equal CPU time, but tasks in a cgroup that has `cpu.shares` set to `200` receive twice the CPU time of tasks in a cgroup where `cpu.shares` is set to `100`. The value specified in the `cpu.shares` file must be `2` or higher.
 
-- `cpu.cfs_period_us` specifies a period of time in microseconds (`µs`, represented here as "us") for how regularly a cgroup's access to CPU resources should be reallocated. 
+- `cpu.cfs_period_us` specifies a period of time in microseconds (`µs`, represented here as "us") for how regularly a cgroup's access to CPU resources should be reallocated.
 - `cpu.cfs_quota_us` specifies the total amount of time in microseconds (µs, represented here as "us") for which all tasks in a cgroup can run during one period (as defined by cpu.cfs_period_us).
 - `nr_throttled`: number of times tasks in a cgroup have been throttled (that is, not allowed to run because they have exhausted all of the available time as specified by their quota).
 - `throttled_time`: the total time duration (in nanoseconds) for which tasks in a cgroup have been throttled.

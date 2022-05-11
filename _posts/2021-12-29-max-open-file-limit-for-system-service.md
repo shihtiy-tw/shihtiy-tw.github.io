@@ -4,6 +4,8 @@ title: '[Linux] Max open file limit with system service'
 date: 2021-12-29 15:50:02 +0000
 categories: [CSIE, Linux]
 tags: [linux, systemd, ulimit, sudo, pam]
+crosspost_to_medium: true
+
 ---
 
 ## Introduction

@@ -8,7 +8,6 @@ crosspost_to_medium: true
 
 ---
 
-
 ## Introduction
 
 When under the following conditions:
@@ -276,7 +275,6 @@ Take a look of the labs above:
     | us-east-1a |            Yes            |     health     |  Yes              |
     | us-east-1b |            Yes            |   unhealthy    |  Yes              |
     | us-east-1c |            Yes            |     health     |  Yes              |
-
 
 From the labs above, we can see that the CLB scales in **the enabled AZ with any backend instance no matter the backend instance is healthy or not**.
 

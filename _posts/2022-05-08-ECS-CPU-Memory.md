@@ -268,7 +268,7 @@ $ cat /sys/fs/cgroup/memory/ecs/602081644df34fb5bf1c5786ef261fe7/2624b365b6ea72e
 
 cgroup setting for CPU has different concept from memory. RedHat document gives a detail description about the cgroup setting for CPU[^8]:
 
-- `cpu.shares` contains an integer value that specifies a ==relative share== of CPU time available to the tasks in a cgroup.
+- `cpu.shares` contains an integer value that specifies __a relative share__ of CPU time available to the tasks in a cgroup.
 
 > For example, tasks in two cgroups that have `cpu.shares` set to `100` will receive equal CPU time, but tasks in a cgroup that has `cpu.shares` set to `200` receive twice the CPU time of tasks in a cgroup where `cpu.shares` is set to `100`. The value specified in the `cpu.shares` file must be `2` or higher.
 

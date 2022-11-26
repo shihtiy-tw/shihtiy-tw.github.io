@@ -140,8 +140,10 @@ collections:
     output: true
     sort_by: order
 
+
 defaults:
-  - scope:
+  -
+    scope:
       path: ''          # An empty string here means all files in the project
       type: posts
     values:
@@ -186,6 +188,7 @@ exclude:
   - '*.gem'
   - '*.gemspec'
   - tools
+  - docs
   - README.md
   - CHANGELOG.md
   - LICENSE

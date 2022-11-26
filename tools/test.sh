@@ -58,7 +58,7 @@ main() {
 
   # build
   JEKYLL_ENV=production bundle exec jekyll b \
-    -d "$SITE_DIR$_baseurl" -c "$_config"
+    -d "$SITE_DIR$_baseurl" -c "$_config"  --trace
 
   # test
   bundle exec htmlproofer "$SITE_DIR" \

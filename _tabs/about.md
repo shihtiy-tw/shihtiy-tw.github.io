@@ -4,6 +4,7 @@ icon: fas fa-info-circle
 order: 4
 ---
 
+<<<<<<< HEAD
 ## About Me
 
 Hi! My name is Shih-Ting, Yuan. I like to simplfiy my life but I also always complicate things. I love to discover new things; share and discuss with others.
@@ -23,3 +24,7 @@ I am a member of the Church of Jesus Christ of Latter-day Saints.
 我是 PADI 進階開放水域 (AOW) 和高氧空氣 (ENA) 的認證潛水員。我曾在台灣墾丁和小琉球潛水。我也喜歡跳舞(Locking style)，享受派對舞。
 
 我是耶穌基督後期聖徒教會的成員。
+=======
+> Add Markdown syntax content to file `_tabs/about.md`{: .filepath } and it will show up on this page.
+{: .prompt-tip }
+>>>>>>> upstream

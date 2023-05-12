@@ -19,7 +19,7 @@ A major part of my efforts has been dedicated to developing informative articles
 
 - [How can I get my Amazon ECS tasks running using the Amazon EC2 launch type to pass the Application Load Balancer health check in Amazon ECS?](https://repost.aws/knowledge-center/troubleshoot-unhealthy-checks-ecs)
 
-## Youtube Videos
+## AWS Youtube Videos
 
 Additionally, I created and published a series of how-to videos, demonstrating the process of mounting an Amazon EFS file system on an Amazon ECS container or task running on Fargate, and changing the status of Amazon EKS nodes from NotReady/Unknown status to Ready status. These videos provide visual, step-by-step guides to help users resolve their problems effectively:
 
@@ -32,13 +32,13 @@ Additionally, I created and published a series of how-to videos, demonstrating t
 
 {% include embed/youtube.html id='X3wPRrVeSqo' %}
 
-## Container Service (ECS) Subject Matter Expert (SME)
+## Subject Matter Expert (SME) in Container Service (ECS)
 
 One of my proudest achievements in the past year has been acquiring Subject Matter Expertise (SME) in Amazon ECS. This accomplishment, stemming from hands-on experience and continuous learning, has greatly enhanced my troubleshooting abilities and understanding of ECS applications.
 
 <div data-iframe-width="150" data-iframe-height="270" data-share-badge-id="57e8f56b-5273-4b94-8b6d-53a4a5859ed5" data-share-badge-host="https://www.credly.com"></div><script type="text/javascript" async src="//cdn.credly.com/assets/utilities/embed.js"></script>
 
-## Promotion
+## Promotion to Cloud Support Engineer II
 
 Parallel to these projects, I've achieved the position of AWS Cloud Support Engineer II. This has broadened my view of AWS operations and enhanced my leadership skills.
 

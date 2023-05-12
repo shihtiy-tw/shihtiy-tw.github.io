@@ -125,18 +125,18 @@ const PvStorage = (function () {
 })(); /* PvStorage */
 
 function countUp(min, max, destId) {
-    if (min < max) {
-        let numAnim = new CountUp(destId, min, max);
-        if (!numAnim.error) {
-            numAnim.start();
-        } else {
-            console.error(numAnim.error);
-        }
+  if (min < max) {
+    let numAnim = new CountUp(destId, min, max);
+    if (!numAnim.error) {
+      numAnim.start();
+    } else {
+      console.error(numAnim.error);
     }
+  }
 }
 
 function countPV(path, rows) {
-    let count = 0;
+  let count = 0;
 
   if (typeof rows !== 'undefined') {
     for (let i = 0; i < rows.length; ++i) {
@@ -147,8 +147,9 @@ function countPV(path, rows) {
         break;
       }
     }
+  }
 
-    return count;
+  return count;
 }
 
 function tacklePV(rows, path, elem, hasInit) {
@@ -162,6 +163,7 @@ function tacklePV(rows, path, elem, hasInit) {
     if (count > initCount) {
       countUp(initCount, count, elem.attr('id'));
     }
+  }
 }
 
 function displayPageviews(data) {
@@ -169,8 +171,8 @@ function displayPageviews(data) {
     return;
   }
 
-    let hasInit = getInitStatus();
-    const rows = data.rows; /* could be undefined */
+  let hasInit = getInitStatus();
+  const rows = data.rows; /* could be undefined */
 
   if ($('#post-list').length > 0) {
     /* the Home page */
@@ -243,29 +245,10 @@ export function initPageviews() {
   } else {
     // no cached
 
-    if (PvStorage.hasCache()) {
-        displayPageviews(PvStorage.getCache());
-
-        if (PvStorage.isExpired()) {
-            if (PvOpts.hasLocalMeta()) {
-                fetchLocalPageviews(true).then(fetchProxyPageviews);
-            } else {
-                fetchProxyPageviews();
-            }
-
-        } else {
-            if (PvStorage.isFromLocal()) {
-                fetchProxyPageviews();
-            }
-        }
-
-    } else { // no cached
-
-        if (PvOpts.hasLocalMeta()) {
-            fetchLocalPageviews().then(fetchProxyPageviews);
-        } else {
-            fetchProxyPageviews();
-        }
+    if (PvOpts.hasLocalMeta()) {
+      fetchLocalPageviews().then(fetchProxyPageviews);
+    } else {
+      fetchProxyPageviews();
     }
   }
 }

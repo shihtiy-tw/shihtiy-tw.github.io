@@ -12,7 +12,7 @@ Sometimes customer will report that their EC2 instances fail the instance status
 
 ## Explanation
 
-Let's go thought what is DHCP and how does DHCP work, what value we can check in DHCP lease and the IP lifetime on the network interface.
+Let's go through what is DHCP and how DHCP works, what value we can check in DHCP lease and the IP lifetime on the network interface.
 
 ### What is DHCP and how does DHCP work?
 

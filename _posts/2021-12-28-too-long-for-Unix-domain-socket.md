@@ -196,9 +196,7 @@ $ echo "/home/shihtiy/.ssh/master-e7f58eb55da9db1a90b39dba271ef9c92838e09a" | wc
 67
 ```
 
-[^1]: https://man.openbsd.org/ssh_config.5
 ## References
 
 [^2]: [Setup steps for SSH connections to AWS CodeCommit repositories on Linux, macOS, or Unix ](https://docs.aws.amazon.com/codecommit/latest/userguide/setting-up-ssh-unixes.html)
 [^1]: https://man.openbsd.org/ssh_config.5
->>>>>>> f64fc4a ([posts]: 2021-12-28-too-long-for-Unix-domain-socket publish)

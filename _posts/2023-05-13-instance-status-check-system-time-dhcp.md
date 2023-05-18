@@ -1,14 +1,14 @@
 ---
 
-title: '[AWS][EC2] Why DHCP Lease Expiration can Cause Instance Status Check Failure?'
+title: '[AWS][EC2] Why Can DHCP Lease Expiration Cause Instance Status Check Failure?'
 date: 2023-05-13 23:26:11 +0000
 categories: [CSIE, Cloud, AWS]
-tags: [ec2, linux, system-time, instance-status-check, dhcp]
+tags: [ec2, linux, system-time, instance-status-check, instance-status-check-failure, dhcp, dhcp-lease]
 ---
 
 ## Introduction / Summary
 
-Sometimes customer will report that their EC2 instances fail the instance status check for no reason and it will be healthy again after rebooting the instance. Where there are many reason can lead to instance status check failure, this article will dive deep on why DHCP lease expiration will cause EC2 instances fail the instance status check due to system time change, dhclient issue and network interface configuration.
+Occasionally, customers may experience their EC2 instances failing the instance status check[^3] unexpectedly. However, these instances typically return to a healthy state after a reboot. While there are many potential causes for instance status check failures, this article will dive into specifically about how DHCP lease expiration can lead to EC2 instances failing the instance status check. This can occur due to changes in system time, dhclient issues, and network interface configuration.
 
 ## Explanation
 
@@ -474,5 +474,8 @@ type=SYSCALL msg=audit(1619799540.147:103): arch=c000003e syscall=159 success=ye
 - [RFC 2131 - Dynamic Host Configuration Protocol](https://datatracker.ietf.org/doc/html/rfc2131)
 - [RFC 4862 - IPv6 Stateless Address Autoconfiguration](https://datatracker.ietf.org/doc/html/rfc4862)
 
+---
+
 [^1]: Covert Communications through Network Configuration Messages - Scientific Figure on ResearchGate. Available from [researchgate](https://www.researchgate.net/figure/Message-exchange-models-in-DHCP_fig1_259117702)
 [^2]: [RFC 4862 - IPv6 Stateless Address Autoconfiguration](https://datatracker.ietf.org/doc/html/rfc4862#section-5.5.4)
+[^3]: [Status checks for your instances - Instance status checks](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/monitoring-system-instance-status-check.html#instance-status-checks)

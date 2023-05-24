@@ -1,8 +1,8 @@
 ---
 
-title: '[AWS][CLB] Which AZ will CLB scale?'
+title: 'Classic Load Balancer Scaling: How to Determine the Target AZ'
 date: 2022-01-02 17:20:24 +0000
-categories: [CSIE, Cloud, AWS]
+categories: [CSIE, AWS]
 tags: [elb, clb, aws, scaling, networking]
 crosspost_to_medium: true
 

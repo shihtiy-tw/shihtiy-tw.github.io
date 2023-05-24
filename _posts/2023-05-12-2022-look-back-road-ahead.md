@@ -1,6 +1,6 @@
 ---
 
-title: '[Journal] A Look Back and the Road Ahead'
+title: '2022 A Look Back and the Road Ahead'
 date: 2023-05-12 20:37:54 +0000
 categories: [Self-Reliance, Career]
 tags: [self-reliance, blog, career, aws]

@@ -1,5 +1,5 @@
 ---
-title: "[Linux] Why do I run into '...too long for Unix domain socket' when git clone with SSH?"
+title: "Overcoming 'Too Long for Unix Domain Socket' Errors in SSH Git Cloning"
 categories: [CSIE, Linux]
 date: 2021-12-28 22:00:00 +0000
 tags: [linux, ssh, git, socket]

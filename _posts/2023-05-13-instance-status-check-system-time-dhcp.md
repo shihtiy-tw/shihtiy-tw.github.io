@@ -1,8 +1,8 @@
 ---
 
-title: '[AWS][EC2] Why Can DHCP Lease Expiration Cause Instance Status Check Failure?'
+title: 'Behind the Scenes of Instance Failures: The Impact of DHCP Lease Expiration'
 date: 2023-05-13 23:26:11 +0000
-categories: [CSIE, Cloud, AWS]
+categories: [CSIE, AWS]
 tags: [ec2, linux, system-time, instance-status-check, instance-status-check-failure, dhcp, dhcp-lease]
 ---
 

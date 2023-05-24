@@ -1,6 +1,6 @@
 ---
 
-title: '[Linux] Port range for NFS client'
+title: 'Navigating the Linux NFS Client: Understanding the Port Range'
 date: 2021-12-30 16:17:17 +0000
 categories: [CSIE, Linux]
 tags: [linux, nfs, tcp, ip, firewall]

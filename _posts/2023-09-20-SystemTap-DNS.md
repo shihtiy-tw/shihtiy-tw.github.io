@@ -119,9 +119,9 @@ With SystemTap script, we successfully identified the service responsible for se
 
 ## References
 
-[^1]: [SystemTap Beginners Guide Red Hat Enterprise Linux 6 | Red Hat Customer Portal](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/6/html-single/systemtap_beginners_guide/index#introduction)
+[^1]: [SystemTap Beginners Guide Red Hat Enterprise Linux 6 - Red Hat Customer Portal](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/6/html-single/systemtap_beginners_guide/index#introduction)
 [^2]: [stat(3type) - Linux manual page](https://man7.org/linux/man-pages/man3/stat.3type.html)
 [^3]: [stap(1) - Linux manual page](https://man7.org/linux/man-pages/man1/stap.1.html)
 [^4]: [sourceware.org/systemtap/examples/network/who\_sent\_it.stp](https://sourceware.org/systemtap/examples/network/who_sent_it.stp)
-[^5]: [probe::netfilter.ip.local\_out Red Hat Enterprise Linux 7 | Red Hat Customer Portal](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/systemtap_tapset_reference/api-netfilter-ip-local-out)
-[^6]: [A Deep Dive into eBPF: Writing an Efficient DNS Monitoring. | by Nurkholish Halim | Medium](https://medium.com/@nurkholish.halim/a-deep-dive-into-ebpf-writing-an-efficient-dns-monitoring-2c9dea92abdf)
+[^5]: [probe::netfilter.ip.local\_out Red Hat Enterprise Linux 7 - Red Hat Customer Portal](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/systemtap_tapset_reference/api-netfilter-ip-local-out)
+[^6]: [A Deep Dive into eBPF: Writing an Efficient DNS Monitoring. - by Nurkholish Halim | Medium](https://medium.com/@nurkholish.halim/a-deep-dive-into-ebpf-writing-an-efficient-dns-monitoring-2c9dea92abdf)

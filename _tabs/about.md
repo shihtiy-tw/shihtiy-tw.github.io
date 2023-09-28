@@ -22,7 +22,7 @@ I am a member of the Church of Jesus Christ of Latter-day Saints.
 
 我目前在愛爾蘭 AWS 擔任雲端支援工程師。我專注在 Linux、網路和容器服務方面為我們的客戶提供幫助。我對設定、性能和意外問題進行故障排除，客戶一起成長。
 
-除了日常的案例處理外，我為 AWS 知識中心撰寫和更新了兩篇關於 Amazon ECS 故障排除的文章，也拍攝兩個 Youtube 影片分享了關於 Amazon ECS/EKS 的設定以及故障輩出。我也獲得 Amazon 的 ECS SME 以及升遷至 雲端支援工程師 II。(見文章: [A Look Back and the Road Ahead](https://shihtiy.com/posts/2022-look-back-road-ahead/))
+除了日常的案例處理外，我為 AWS 知識中心撰寫和更新了兩篇關於 Amazon ECS 故障排除的文章，也拍攝兩個 Youtube 影片分享了關於 Amazon ECS/EKS 的設定以及故障排除。我也獲得 Amazon 的 ECS SME 以及升遷至 雲端支援工程師 II。(見文章: [A Look Back and the Road Ahead](https://shihtiy.com/posts/2022-look-back-road-ahead/))
 
 工作之餘，我是 PADI 進階開放水域 (AOW) 和高氧空氣 (ENA) 的認證潛水員。我曾在台灣潛水。我也喜歡跳舞(Locking style)，享受派對舞。
 

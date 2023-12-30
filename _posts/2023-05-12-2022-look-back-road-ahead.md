@@ -36,7 +36,7 @@ Additionally, I created and published a series of how-to videos, demonstrating t
 
 One of my proudest achievements in the past year has been acquiring Subject Matter Expertise (SME) in Amazon ECS. This accomplishment, stemming from hands-on experience and continuous learning, has greatly enhanced my troubleshooting abilities and understanding of ECS applications.
 
-<div data-iframe-width="150" data-iframe-height="270" data-share-badge-id="57e8f56b-5273-4b94-8b6d-53a4a5859ed5" data-share-badge-host="https://www.credly.com"></div><script type="text/javascript" async src="https//cdn.credly.com/assets/utilities/embed.js"></script>
+<div data-iframe-width="150" data-iframe-height="270" data-share-badge-id="57e8f56b-5273-4b94-8b6d-53a4a5859ed5" data-share-badge-host="https://www.credly.com"></div><script type="text/javascript" async src="https://cdn.credly.com/assets/utilities/embed.js"></script>
 
 ## Promotion to Cloud Support Engineer II
 

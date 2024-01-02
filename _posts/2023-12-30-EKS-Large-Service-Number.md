@@ -1,5 +1,5 @@
 ---
-title: 'Kubernetes Mysteries Slowness: Why Java Application Start Lagging'
+title: 'Kubernetes Mysteries Slowness: Why Java Application Bootstrap Lagging'
 date: 2023-12-30 09:37:12 +0000
 categories: [CSIE, AWS, EKS]
 tags: [kubernetes, eks, large-cluster]

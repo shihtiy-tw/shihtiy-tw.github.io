@@ -22,16 +22,6 @@ Enables the sharing of multiple sessions over a single network connection...
 ControlPath
 Specify the path to the control socket used for connection sharing as described in the ControlMaster section above or the string ''none'' to disable connection sharing...
 ```
-{: .nolineno }
-
-When using SSH, people may want to speed up the SSH connection establishment with configuration of ControlMaster and ControlPath. According to [the ssh_config man page](https://linux.die.net/man/5/ssh_config):
-
-```
-ControlMaster
-Enables the sharing of multiple sessions over a single network connection...
-ControlPath
-Specify the path to the control socket used for connection sharing as described in the ControlMaster section above or the string ''none'' to disable connection sharing...
-```
 
 This means that with multiple SSH session with the control socket to speed up the SSH connection establishment.
 

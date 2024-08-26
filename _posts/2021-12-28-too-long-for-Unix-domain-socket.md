@@ -22,6 +22,7 @@ Enables the sharing of multiple sessions over a single network connection...
 ControlPath
 Specify the path to the control socket used for connection sharing as described in the ControlMaster section above or the string ''none'' to disable connection sharing...
 ```
+{: .nolineno }
 
 This means that with multiple SSH session with the control socket to speed up the SSH connection establishment.
 
@@ -30,13 +31,14 @@ This means that with multiple SSH session with the control socket to speed up th
 When we try to pull git repo from CodeCoommit, we may run into the following error:
 
 ```bash
-git clone ssh://git-codecommit.xxx.amazonaws.com/v1/repos/xxx
+$ git clone ssh://git-codecommit.xxx.amazonaws.com/v1/repos/xxx
 Cloning into 'xxx'...
 unix_listener: "/Users/xxxxxxxxxx/.ssh/master-xxx@git-codecommit.xxx:22" too long for Unix domain socket
 Cloning into 'xxx'...
 unix_listener: "/Users/xxxxxxxxxx/.ssh/master-xxx@git-codecommit.xxx:22" too long for Unix domain socket
 fatal: Could not read from remote repository.
 ```
+{: .nolineno }
 
 And from the ~/.ssh/config, we can see the following configuration:
 
@@ -45,7 +47,6 @@ host *
 ControlMaster auto
 ControlPath ~/.ssh/master-%r@%h:%p
 ```
-{: .nolineno }
 
 ## Explanation
 
@@ -69,7 +70,6 @@ unix_listener(const char *path, int backlog, int unlink_first)
 		return -1;
 	}
 ```
-{: .nolineno }
 
 We can see that if the socket path is longer then `sizeof(sunaddr.sun_path)`, and then we will get the error message `unix_listener: ... too long for Unix domain socket`. In unix socket man page, it describes that the length of sun_path is `108` char ([source code](https://linux.die.net/man/7/unix)):
 
@@ -81,11 +81,12 @@ struct sockaddr_un {
     char        sun_path[UNIX_PATH_MAX];  /* pathname */
 };
 ```
-{: .nolineno }
 
 ### SSH config for ControlPath
 
 Why the socket path in the use case is longer than `108` char? When configuring the `ControlPath` parameter as `~/.ssh/master-%r@%h:%p`, according to the [ssh_config man page](https://man.openbsd.org/ssh_config.5), this means the following, :
+
+```
 host *
 ControlMaster auto
 ControlPath ~/.ssh/master-%r@%h:%p
@@ -166,6 +167,7 @@ With CodeCommit, the remote login user name is the SSH key ID, the host name is 
 $ echo "/Users/xxxxxxxxxx/.ssh/master-xxx@git-codecommit.xxx:22" | wc -m
 115
 ```
+{: .nolineno }
 
 ## Solution
 
@@ -185,6 +187,7 @@ master-e7f58eb55da9db1a90b39dba271ef9c92838e09a
 $ echo "/home/shihtiy/.ssh/master-e7f58eb55da9db1a90b39dba271ef9c92838e09a" | wc -m
 67
 ```
+{: .nolineno }
 
 ## References
 

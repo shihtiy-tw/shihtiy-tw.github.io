@@ -207,5 +207,5 @@ jekyll-archives:
     category: /categories/:name/
 google_adsense:
   client_id: ca-pub-3029423399586599  # adsense client id, ex: ca-pub-0000000000000000
-  slot_id: 0000000000  # adsense slot id, ex: 0000000000
+  slot_id: 8650311902  # adsense slot id, ex: 0000000000
   enabled: true

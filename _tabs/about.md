@@ -12,7 +12,7 @@ I currently work as a cloud support engineer at AWS in Ireland. I assist our cus
 
 Besides handling daily cases, I've been immersed in enhancing AWS Knowledge Center content including publishing/updating two ECS troubleshooting articles and publish two Youtube videos for ECS/EKS configuration/troubleshooting, acquiring Amazon ECS Subject Matter Expertise (SME), and advancing towards a promotion to Cloud Support Engineer II. I’ve also obtained a new certification: AWS Certified Solutions Architect – Professional.
 
-Outside of work, I am a PADI-certified Advanced Open Water and Enriched Air Nitrox diver who has explored the underwater wonders in Taiwan and Portugal. I was able to reach the summit of Jade Mountain and go around the island in Taiwan. I also like to dance (Locking style) and enjoy party dance.
+Outside of work, I am a PADI-certified Advanced Open Water and Enriched Air Nitrox diver who has explored the underwater wonders in Taiwan and Portugal. I was able to reach the summit of Jade Mountain and go around the island in Taiwan. I also like to dance (Locking style) and enjoy party dance. I host a podcast show [Restart](https://open.spotify.com/show/7CsVZm7vNHJQsOGYzUeh4B) with my friends.
 
 I am an husband and a member of the Church of Jesus Christ of Latter-day Saints.
 
@@ -29,7 +29,7 @@ I am an husband and a member of the Church of Jesus Christ of Latter-day Saints.
 
 除了日常的案例處理外，我為 AWS 知識中心撰寫和更新了兩篇關於 Amazon ECS 故障排除的文章，也拍攝兩個 Youtube 影片分享了關於 Amazon ECS/EKS 的設定以及故障排除。我獲得 Amazon 的 ECS SME 以及升遷至 雲端支援工程師 II。我也獲得 AWS Certified Solutions Architect – Professional 的專業證照。
 
-工作之餘，我是 PADI 進階開放水域 (AOW) 和高氧空氣 (ENA) 的認證潛水員。我曾在台灣和葡萄牙潛水。我曾攻頂臺灣玉山和環島。我也喜歡跳舞(Locking style)，享受派對舞。
+工作之餘，我是 PADI 進階開放水域 (AOW) 和高氧空氣 (ENA) 的認證潛水員。我曾在台灣和葡萄牙潛水。我曾攻頂臺灣玉山和環島。我也喜歡跳舞(Locking style)，享受派對舞。我和我的朋友一起錄製 podcast 節目[重新開機](https://open.spotify.com/show/7CsVZm7vNHJQsOGYzUeh4B)。
 
 我是一個丈夫，也是耶穌基督後期聖徒教會的成員。
 

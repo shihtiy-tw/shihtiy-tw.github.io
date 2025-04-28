@@ -98,6 +98,7 @@ script_includes:
     </div>
   </header>
 
+
   {% if enable_toc %}
     <div id="toc-bar" class="d-flex align-items-center justify-content-between invisible">
       <span class="label text-truncate">{{ page.title }}</span>
@@ -121,6 +122,7 @@ script_includes:
       <div id="toc-popup-content" class="px-4 py-3 pb-4"></div>
     </dialog>
   {% endif %}
+
 
   <div class="content">
     {{ content }}
@@ -175,6 +177,6 @@ script_includes:
     </div>
     <!-- .post-tail-bottom -->
   </div>
-  {% include adsense.html %}
+  {% include adsense_responsive.html %}
   <!-- div.post-tail-wrapper -->
 </article>

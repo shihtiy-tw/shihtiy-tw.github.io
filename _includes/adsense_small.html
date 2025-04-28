@@ -1,0 +1,15 @@
+{% if site.google_adsense and site.google_adsense.enabled %}
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client={{ site.google_adsense.client_id }}" crossorigin="anonymous"></script>>
+<ins class="adsbygoogle"
+     style="display:inline-block;width:255px;height:255px"
+     data-ad-client="{{ site.google_adsense.client_id }}"
+     data-ad-slot="{{ include.slot_id | default: site.google_adsense.tag_slot_id }}"
+     {% unless jekyll.environment == "production" %}
+     data-ad-test="on"
+     {% endunless %}
+>
+</ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+{% endif %}

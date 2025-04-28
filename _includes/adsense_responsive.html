@@ -3,7 +3,7 @@
 <ins class="adsbygoogle"
      style="display:block"
      data-ad-client="{{ site.google_adsense.client_id }}"
-     data-ad-slot="{{ site.google_adsense.slot_id }}"
+     data-ad-slot="{{ include.slot_id | default: site.google_adsense.horizontal_slot_id }}"
      data-ad-format="auto"
      data-full-width-responsive="true"
      {% unless jekyll.environment == "production" %}

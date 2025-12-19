@@ -11,8 +11,6 @@ title: "Lessons from Six Years in AWS Support: Troubleshooting and Operational T
 date: 2025-12-18 14:45:12 +0000
 ---
 
-# Lessons from Six Years in AWS Support: Troubleshooting and Operational Thinking
-
 ## TL;DR
 
 I spent six years at Amazon Web Services (AWS) as a Cloud Support Engineer, advancing from an associate role to a subject matter expert in container services while supporting enterprise customers globally. This journey taught me deep technical skills in Linux, networking, and containers, along with effective troubleshooting methodologies that prioritized customer impact and quick resolutions. Key takeaways from Amazon include the value of escalating issues promptly, documenting work thoroughly, and building cross-functional networks to deliver exceptional support.

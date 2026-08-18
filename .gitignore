@@ -23,3 +23,10 @@ package-lock.json
 !.vscode/tasks.json
 
 # Misc
+# NOTE: `_sass/vendors` and `assets/js/dist` are intentionally tracked here,
+# unlike upstream Chirpy, since the site builds from this repo's theme sources.
+
+# Hidden system files
+*~
+.DS_Store
+Thumbs.db

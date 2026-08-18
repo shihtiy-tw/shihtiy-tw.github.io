@@ -20,8 +20,7 @@ platforms:
 
   # Uncomment below if you need to.
   #
-  # -
-  #   type: Weibo
+  # - type: Weibo
   #   icon: "fab fa-weibo"
   #   link: "https://service.weibo.com/share/share.php?title=TITLE&url=URL"
   #

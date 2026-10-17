@@ -1,1 +1,5 @@
-<!-- A placeholder to allow defining custom metadata -->
+<!-- Overrides the Chirpy placeholder. Loads the AdSense library once per page;
+     the adsense_* includes only render <ins> slots and push them. -->
+{% if site.google_adsense and site.google_adsense.enabled %}
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client={{ site.google_adsense.client_id }}" crossorigin="anonymous"></script>
+{% endif %}
